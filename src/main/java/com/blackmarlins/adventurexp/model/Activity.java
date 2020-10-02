@@ -63,4 +63,15 @@ public class Activity {
     public void setAgeLimit(int ageLimit) {
         this.ageLimit = ageLimit;
     }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", ageLimit=" + ageLimit +
+                '}';
+    }
 }
