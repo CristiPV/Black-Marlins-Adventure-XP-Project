@@ -3,8 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
+    <link href='https://fonts.googleapis.com/css?family=Share Tech Mono' rel='stylesheet'>
+    <style>
+
+body {
+    font-family: 'Share Tech Mono', roboto, "Times New Roman";
+}
+
+
+
+.loginForm
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -15%;
+    margin-top: -200px;
+    text-align: center;
+    height: 400px;
+    width: 30%;
+    font-size: 24px;
+    color: rgb(0,184,107);
+}
+
+
+.loginForm > h1 {
+    font-size: 50px;
+    color: rgb(0,111,64);
+}
+
+.loginForm > p {
+    text-align: left;
+}
+
+.loginForm > input {
+    text-align: left;
+    border-style: hidden;
+    font-family: 'Share Tech Mono', roboto, "Times New Roman";
+    font-size: 24px;
+    color: rgb(0,184,107);
+    width: 100%;
+    transition: color, 1s;
+}
+
+.loginForm > hr {
+    border-top: 3px solid rgb(0,184,107);
+}
+
+.loginForm > input:focus {
+    outline: none;
+    color: rgb(0,111,64);
+}
+
+.loginForm > input:hover {
+    color: rgb(0,111,64);
+}
+
+::placeholder {
+    color: rgba(0,184,107,0.5);
+}
+
+.loginForm > button {
+    margin-top: 25px;
+    background-color: rgb(0,111,64);
+    color: white;
+    border-radius: 7px;
+    width: 50%;
+    height: 40px;
+    font-size: 24px;
+    font-family: 'Share Tech Mono', roboto, "Times New Roman";
+    border: none;
+    transition: 1s;
+}
+
+.loginForm > button:hover {
+    transform: scale(1.1);
+}
+
+.loginForm > button:focus {
+    outline: none;
+}
+
+
+
+    </style>
 </head>
 <body>
+
+
+ <div class="main">
+     <div class="loginForm">
+         <h1>Login</h1>
+         <p>Username</p>
+         <input type="text" placeholder="Type your username . . .">
+         <hr>
+         <p>Password</p>
+         <input type="text" placeholder="Type your password . . .">
+         <hr>
+         <button>login</button>
+     </div>
+ </div>
+
  <h2>Hello world</h2>
  <p th:if="${isAdmin == true}"> You are an admin</p>
 </body>
