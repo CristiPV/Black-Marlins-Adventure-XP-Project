@@ -2,15 +2,12 @@ package com.blackmarlins.adventurexp.controller;
 
 import com.blackmarlins.adventurexp.model.Activity;
 import com.blackmarlins.adventurexp.repository.ActivityRepository;
+import com.blackmarlins.adventurexp.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.*;
-
-=======
 import org.springframework.web.bind.annotation.GetMapping;
->>>>>>> ea6301b788fa12baf3006e87f72b3c5f561fd34b
 import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,65 +18,63 @@ import java.util.Optional;
 public class ActivityController {
 
     @Autowired
-    private ActivityRepository activityRepository;
+    private ActivityService activityService;
 
+    // list all activities
     @GetMapping ("/activities")
     public String getListOfActivities(Model model){
-        List<Activity> activitiesList = activityRepository.findAll();
+        List<Activity> activitiesList = activityService.findAllActivities();
         model.addAttribute("activities", activitiesList);
         return "activitiesList";
     }
 
-<<<<<<< HEAD
-    //display update form
-    @GetMapping("/updateActivity/{activityId}")
-    public String updateVehicle(@PathVariable("activityId") Long activityId, Model model) {
-        model.addAttribute("activity", activityService.findActivityById(activityId));
-        return "updateVehicle";
-    }
 
-    //update activity information
-    @PostMapping("/updateActivity")
-    public String updateActivity(@ModelAttribute Activity activity) {
-        activityService.updateActivity(activity);
-        return "redirect:/activities";
-    }
-=======
-    @Autowired
-    ActivityRepository activityRepository;
+    // CREATE -------->
 
+    // display add form
     @GetMapping("/addActivity")
     public String addActivity() {
         return "addActivity";
     }
 
+    // add activity
     @PostMapping("/addActivity")
     public String addActivity(@ModelAttribute Activity activity) {
         System.out.println(activity.toString());
-        activityRepository.save(activity);
-
+        activityService.saveActivity(activity);
         return "index";
     }
 
-    /*@GetMapping("/updateActivity/{id}")
-    public String updateActivity(@PathVariable("id") long id, Model model) {
-        model.addAttribute("activity", activityRepository.findById(id));
+
+    // READ -------->
+
+    // add view single activity method here...
+
+
+
+    // UPDATE -------->
+
+    // display update form
+    @GetMapping("/updateActivity/{activityId}")
+    public String updateVehicle(@PathVariable("activityId") Long activityId, Model model) {
+        model.addAttribute("activity", activityService.findActivityById(activityId));
         return "updateActivity";
     }
 
+    // update activity
     @PostMapping("/updateActivity")
     public String updateActivity(@ModelAttribute Activity activity) {
-        System.out.println(activity.toString());
-        activityRepository.save(activity);
-        return "redirect:/index";
-    }*/
+        activityService.updateActivity(activity);
+        return "redirect:/activities";
+    }
+
+
+    // DELETE -------->
 
     @GetMapping("/deleteActivity/{id}")
     public String deleteActivity(@PathVariable("id") long id) {
-        Activity activity = activityRepository.findById(id).get();
-        activityRepository.delete(activity);
+        Activity activity = activityService.findActivityById(id);
+        activityService.deleteActivity(activity);
         return "index";
     }
-
->>>>>>> ea6301b788fa12baf3006e87f72b3c5f561fd34b
 }

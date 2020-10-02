@@ -30,4 +30,8 @@ public class ActivityService {
     public void updateActivity(Activity activity) {
         activityRepository.save(activity);
     }
+
+    public void deleteActivity(Activity activity) {
+        activityRepository.delete(activity);
+    }
 }
