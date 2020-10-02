@@ -36,19 +36,7 @@ public class Activity {
         this.ageLimit = ageLimit;
     }
 
-<<<<<<< HEAD
-    public Activity(Long id, String name, String description, Double price, int ageLimit) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.ageLimit = ageLimit;
-    }
-
-    public Long getId() {
-=======
     public long getId() {
->>>>>>> ea6301b788fa12baf3006e87f72b3c5f561fd34b
         return id;
     }
 
