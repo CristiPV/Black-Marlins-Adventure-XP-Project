@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Activity</title>
+</head>
+<body>
+<h1>Update Activity</h1>
+<form th:action="@{/updateActivity}" method="post">
+    <label>Name</label><br>
+    <input type="text" name="name" th:value="${activity.name}"/><br>
+    <label>Description</label><br>
+    <input type="text" name="description" th:value="${activity.description}"/><br>
+    <label>Price</label><br>
+    <input typ e="text" name="price" th:value="${activity.price}"/><br>
+    <label>Age limit</label><br>
+    <input type="text" name="ageLimit" th:value="${activity.ageLimit}/"><br><br>
+    <input type="submit" value="Submit">
+</form>
+<a href="/index">
+    <button>Cancel</button>
+</a>
+</body>
+</html>

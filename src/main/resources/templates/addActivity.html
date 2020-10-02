@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Add Activity</h1>
+<form th:action="@{/addActivity}" method="post">
+    <label>Name</label><br>
+    <input type="text" name="name"><br>
+    <label>Description</label><br>
+    <input type="text" name="description"><br>
+    <label>Price</label><br>
+    <input type="text" name="price"><br>
+    <label>Age limit</label><br>
+    <input type="text" name="ageLimit"><br><br>
+    <input type="submit" value="Submit">
+</form>
+<a href="/index">
+    <button>Cancel</button>
+</a>
+</body>
+</html>
