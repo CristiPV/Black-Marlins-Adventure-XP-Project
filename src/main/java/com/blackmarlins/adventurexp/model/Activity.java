@@ -20,13 +20,23 @@ public class Activity {
 
     public Activity(){}
 
-    public Activity(String name, String description, Double price, int ageLimit) {
+    public Activity(Long id, String name, String description, Double price, int ageLimit) {
+        this.id=id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.ageLimit = ageLimit;
     }
 
+    public Activity(String name, String description, Double price, int ageLimit) {
+
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.ageLimit = ageLimit;
+    }
+
+<<<<<<< HEAD
     public Activity(Long id, String name, String description, Double price, int ageLimit) {
         this.id = id;
         this.name = name;
@@ -36,10 +46,13 @@ public class Activity {
     }
 
     public Long getId() {
+=======
+    public long getId() {
+>>>>>>> ea6301b788fa12baf3006e87f72b3c5f561fd34b
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

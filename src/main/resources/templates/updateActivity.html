@@ -1,8 +1,7 @@
-<!DOCTYPE html> <!--Karolina-->
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:insert="header :: header_template">
+<head>
     <title id="title">Update Activity</title>
-    <!-- import header part-->
 </head>
 <body>
 
@@ -13,7 +12,7 @@
     </a>
 </div>
 
-<h1 class="heading">Update Vehicle Information</h1>
+<h1 class="heading">Update Activity</h1>
 
 <main class="main_body">
     <!-- form to display and insert information -->
@@ -42,9 +41,9 @@
         </fieldset><br>
         <input class="btn-submit-add" type="submit" value="Submit Entry">
     </form>
-    <p style="text-align: center; font-size: 14px;">*Please note that by entering new price,<br>the price will be updated to all vehicles of this brand and model.<br></p>
-</main>
-<!-- import footer-->
-<div th:insert="footer :: footer_template"></div>
+        <!-- CANCEL BUTTON -->
+        <a href="/index"><button>Cancel</button></a>
+    </main>
+
 </body>
 </html>
