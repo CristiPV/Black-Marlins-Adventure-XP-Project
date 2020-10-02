@@ -22,6 +22,15 @@
                 <td th:text="${activity.description}"/>
                 <td th:text="${activity.price}"/>
                 <td th:text="${activity.ageLimit}"/>
+                <td>
+                <!-- VIEW -->
+                <a th:href="@{'/viewActivity/'+${activity.id}}"><button class="btn-action">VIEW</button></a>
+                <!-- UPDATE -->
+                <a th:href="@{'/updateActivity/'+${activity.id}}"><button class="btn-action">UPDATE</button></a>
+                <!-- DELETE with confirmation message -->
+                <a th:href="@{'/deleteActivity/'+${activity.id}}"><button class="btn-action" onclick="return confirm('Are you sure you want to delete this activity?');">
+                    DELETE</button></a>
+                </td>
             </tr>
         </tbody>
     </table>
