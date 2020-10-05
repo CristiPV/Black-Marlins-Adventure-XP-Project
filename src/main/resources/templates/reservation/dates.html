@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/list.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Reservation</title>
+</head>
+
+<body>
+    <div th:text="${reservationFlow.getActiveStepDescription().getDescription()}"></div>
+    <form id="form" class="ui form" th:action="@{/reservation/dates}" method="post"
+          th:object="${reservationFlow.reservation}">
+
+        <div class="two fields">
+            <div>
+                <label for="checkInDatePicker">Date</label>
+                <input id="checkInDatePicker" type="date"
+                       th:attr= "min=${now}" th:value="${#temporals.format(reservationFlow.reservation.date, 'dd-MM-yyyy')}"
+                       th:field="*{date}" />
+            </div>
+            <div>
+                <label for="numberOfHoursPicker">Duration (hours)</label>
+                <input id="numberOfHoursPicker" type="number" th:field="*{hours}" min="1"/>
+            </div>
+        </div>
+
+        <div class="field">
+            <button class="ui button" type="submit" name="cancel">Cancel</button>
+            <button class="ui button" type="submit">Next</button>
+        </div>
+    </form>
+</body>
+</html>

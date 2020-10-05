@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/list.css">
+    <title>Completed</title>
+</head>
+
+<body>
+
+    <!-- just for testing the sidebar
+    <--sidebar start
+    <aside>
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+    </aside> -->
+
+    <div>
+        <h2>Success!</h2>
+        <p>You have now made a reservation.</p>
+    </div>
+    <!-- Back to activities list button -->
+    <a th:href="@{/activities/list}" class="btn btn-primary btn-sm mb-3" >Back to Activity List</a>
+
+</body>
+</html>

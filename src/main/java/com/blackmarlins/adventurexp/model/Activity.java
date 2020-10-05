@@ -1,43 +1,50 @@
 package com.blackmarlins.adventurexp.model;
 
-import org.hibernate.annotations.GenericGenerator;
+import com.blackmarlins.adventurexp.model.reservation.Reservation;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Activity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
+
+    @OneToMany(mappedBy = "activity", orphanRemoval=true)
+    private List<Reservation> reservations;
+
     private String name;
     private String description;
-    private Double price;
+    private Double hourlyPrice;
     private int ageLimit;
 
-    public Activity(){}
+    public Activity(){
+        this.id = Long.valueOf(0);
+        this.reservations = new ArrayList<>();
+    }
 
-    public Activity(Long id, String name, String description, Double price, int ageLimit) {
-        this.id=id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.ageLimit = ageLimit;
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations.addAll(reservations);
     }
 
     public Activity(String name, String description, Double price, int ageLimit) {
-
         this.name = name;
         this.description = description;
-        this.price = price;
+        this.hourlyPrice = price;
         this.ageLimit = ageLimit;
     }
 
-    public long getId() {
-        return id;
+    public Long getId() {
+        return this.id;
     }
 
     public void setId(long id) {
@@ -60,12 +67,12 @@ public class Activity {
         this.description = description;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getHourlyPrice() {
+        return hourlyPrice;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setHourlyPrice(Double price) {
+        this.hourlyPrice = price;
     }
 
     public int getAgeLimit() {
@@ -80,9 +87,10 @@ public class Activity {
     public String toString() {
         return "Activity{" +
                 "id=" + id +
+                ", reservations=" + reservations +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", price=" + price +
+                ", hourlyPrice=" + hourlyPrice +
                 ", ageLimit=" + ageLimit +
                 '}';
     }

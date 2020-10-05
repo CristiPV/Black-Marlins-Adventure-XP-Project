@@ -1,80 +1,86 @@
 package com.blackmarlins.adventurexp.controller;
 
 import com.blackmarlins.adventurexp.model.Activity;
-import com.blackmarlins.adventurexp.repository.ActivityRepository;
+import com.blackmarlins.adventurexp.model.reservation.Reservation;
 import com.blackmarlins.adventurexp.service.ActivityService;
+import com.blackmarlins.adventurexp.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
+import java.util.Set;
 
 @Controller
+@RequestMapping("/activities")
 public class ActivityController {
 
-    @Autowired
     private ActivityService activityService;
+    private ReservationService reservationService;
+
+    @Autowired
+    public ActivityController(ActivityService activityService, ReservationService reservationService) {
+        this.activityService = activityService;
+        this.reservationService = reservationService;
+    }
 
     // list all activities
-    @GetMapping ("/activities")
+    @GetMapping ("/list")
     public String getListOfActivities(Model model){
         List<Activity> activitiesList = activityService.findAllActivities();
         model.addAttribute("activities", activitiesList);
-        return "activitiesList";
+        List<Reservation> reservations = activityService.findReservationsByActivity(1);
+        return "/activity/activitiesList";
     }
 
 
     // CREATE -------->
-
-    // display add form
+    // show form for add
     @GetMapping("/addActivity")
-    public String addActivity() {
-        return "addActivity";
+    public String addActivity(Model model) {
+        model.addAttribute("activity", new Activity());
+        return "/activity/activitiesForm";
     }
 
-    // add activity
-    @PostMapping("/addActivity")
-    public String addActivity(@ModelAttribute Activity activity) {
-        System.out.println(activity.toString());
+    // save activity
+    @PostMapping("/save")
+    public String addActivity(@ModelAttribute("activity") Activity activity) {
         activityService.saveActivity(activity);
-        return "index";
+        return "redirect:/activities/list";
     }
 
 
     // READ -------->
-
-    // add view single activity method here...
-
+    @GetMapping ("/showFormForRead")
+    public String showFormForRead(@RequestParam("activityId") Long id, Model model) {
+        // get the employee from the db
+        Activity activity = activityService.findActivityById(id);
+        // set employee as a model attribute to pre-populate the form
+        model.addAttribute("activity", activity);
+        // send over to our form
+        return "/activity/activitiesRead";
+    }
 
 
     // UPDATE -------->
-
-    // display update form
-    @GetMapping("/updateActivity/{activityId}")
-    public String updateVehicle(@PathVariable("activityId") Long activityId, Model model) {
-        model.addAttribute("activity", activityService.findActivityById(activityId));
-        return "updateActivity";
-    }
-
-    // update activity
-    @PostMapping("/updateActivity")
-    public String updateActivity(@ModelAttribute Activity activity) {
-        activityService.updateActivity(activity);
-        return "redirect:/activities";
+    @GetMapping ("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("activityId") Long id, Model model) {
+        // get the employee from the db
+        Activity activity = activityService.findActivityById(id);
+        // set employee as a model attribute to pre-populate the form
+        model.addAttribute("activity", activity);
+        // send over to our form
+        return "/activity/activitiesForm";
     }
 
 
     // DELETE -------->
-
-    @GetMapping("/deleteActivity/{id}")
-    public String deleteActivity(@PathVariable("id") long id) {
-        Activity activity = activityService.findActivityById(id);
-        activityService.deleteActivity(activity);
-        return "index";
+    @GetMapping("/deleteActivity")
+    public String delete(@RequestParam("activityId") Long id) {
+        // delete the activity
+        activityService.deleteActivity(id);
+        // redirect to /activities/list
+        return "redirect:/activities/list";
     }
 }

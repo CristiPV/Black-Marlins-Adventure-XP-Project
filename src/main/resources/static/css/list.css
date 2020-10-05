@@ -1,0 +1,38 @@
+#header {
+    text-align: left;
+    border-style: hidden;
+    font-family: 'Share Tech Mono', roboto, "Times New Roman", sans-serif;
+    font-size: 40px;
+    color: rgb(0,184,107);
+    width: 100%;
+    margin-top: 50px;
+}
+
+#addButton {
+    margin-bottom: 15px;
+}
+
+#readButton {
+    background-color: #198908;
+    border-color: #198908;
+}
+
+#readButton:hover, #readButton:focus, #readButton:active, #readButton.active {
+    background-color: #0b5c04;
+    border-color: #021e07;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+}
+
+#center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}

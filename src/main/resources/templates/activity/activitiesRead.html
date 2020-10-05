@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/list.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Activity Page</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Back to activities list button -->
+        <a th:href="@{/activities/list}" class="btn btn-primary btn-sm mb-3" >Back to Activity List</a>
+
+        <div class="row">
+            <h2>Name: <span th:text="${activity.name}"></span></h2>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h2>Description</h2>
+                <p th:text="${activity.description}"></p>
+            </div>
+            <div class="column">
+                <section>
+                    <h2>Hourly Price: <span th:text="${activity.hourlyPrice}"></span></h2>
+                </section>
+                <section>
+                    <h2>Age Limit: <span th:text="${activity.ageLimit}"></span></h2>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

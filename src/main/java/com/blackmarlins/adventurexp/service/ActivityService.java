@@ -1,18 +1,22 @@
 package com.blackmarlins.adventurexp.service;
 
 import com.blackmarlins.adventurexp.model.Activity;
+import com.blackmarlins.adventurexp.model.reservation.Reservation;
 import com.blackmarlins.adventurexp.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ActivityService {
 
-    @Autowired
     private ActivityRepository activityRepository;
+
+    @Autowired
+    public ActivityService(ActivityRepository activityRepository) {
+        this.activityRepository = activityRepository;
+    }
 
     public List<Activity> findAllActivities() {
         return activityRepository.findAll();
@@ -23,15 +27,19 @@ public class ActivityService {
     }
 
     public Activity findActivityById(Long activityId) {
-        Optional<Activity> optionalActivity = activityRepository.findById(activityId);
-        return optionalActivity.orElseGet(() -> new Activity("No result", "No result", 0.0, 0));
+        Optional<Activity> result = activityRepository.findById(activityId);
+        Activity activity = null;
+        if (result.isPresent()) {
+            activity = result.get();
+        }
+        return activity;
     }
 
-    public void updateActivity(Activity activity) {
-        activityRepository.save(activity);
+    public void deleteActivity(Long id) {
+        activityRepository.deleteById(id);
     }
 
-    public void deleteActivity(Activity activity) {
-        activityRepository.delete(activity);
+    public List<Reservation> findReservationsByActivity(int i) {
+        return null;
     }
 }
