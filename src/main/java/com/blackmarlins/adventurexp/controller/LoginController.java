@@ -28,7 +28,7 @@ public class LoginController {
     @PostMapping("/loginSubmission")
     public String login(@RequestParam(value="username") String username,
                                @RequestParam(value="password") String password,
-                                Model model) {
+                                Model model, Model model1) {
         User currentUser = new User(username, password);
         isAdmin = false;
         isLoggedIn = false;
@@ -47,7 +47,9 @@ public class LoginController {
                 isAdmin = true;
             }
             model.addAttribute("isAdmin", isAdmin);
-            return "redirect:/activities/list";
+            model1.addAttribute("username", username);
+            return "welcome";
+            //return "redirect:/activities/list";
         } else {
             return "redirect:/login";
         }
