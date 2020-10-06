@@ -18,7 +18,7 @@ public class LoginController {
     @RequestMapping(value = {"/login"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String loginIndex()
     {
-        return "loginTest";
+        return "login";
     }
 
     @PostMapping("/loginSubmission")
