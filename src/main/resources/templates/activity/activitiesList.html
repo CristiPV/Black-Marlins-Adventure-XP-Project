@@ -41,7 +41,7 @@
                        class="btn btn-info btn-sm">Update
                     </a>
                     <!-- Delete activity -->
-                    <a th:href="@{/activities/deleteActivity(activityId=${activity.id})}"
+                    <a th:if="${isAdmin == true}" th:href="@{/activities/deleteActivity(activityId=${activity.id})}"
                        class="btn btn-danger btn-sm"
                        onclick="if (!(confirm('Are you sure you want to delete this activity?'))) return false">Delete
                     </a>
