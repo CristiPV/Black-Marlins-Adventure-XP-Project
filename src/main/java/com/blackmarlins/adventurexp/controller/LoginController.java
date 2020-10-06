@@ -12,6 +12,10 @@ import java.util.List;
 
 @Controller
 public class LoginController {
+
+    private static boolean isAdmin;
+    private static boolean isLoggedIn;
+
     @Autowired
     UserRepository userRepository;
 
@@ -26,8 +30,8 @@ public class LoginController {
                                @RequestParam(value="password") String password,
                                 Model model) {
         User currentUser = new User(username, password);
-        boolean isAdmin = false;
-        boolean isLoggedIn = false;
+        isAdmin = false;
+        isLoggedIn = false;
         List<User> users = new ArrayList<>();
         users.addAll(userRepository.findAll());
 
@@ -43,9 +47,17 @@ public class LoginController {
                 isAdmin = true;
             }
             model.addAttribute("isAdmin", isAdmin);
-            return "index";
+            return "redirect:/activities/list";
         } else {
             return "redirect:/login";
         }
+    }
+
+    public static boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public static boolean isLoggedIn() {
+        return isLoggedIn;
     }
 }

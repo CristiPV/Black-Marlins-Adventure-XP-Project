@@ -26,10 +26,11 @@ public class ActivityController {
     }
 
     // list all activities
-    @GetMapping ("/list")
+    @RequestMapping(value = {"/list"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String getListOfActivities(Model model){
         List<Activity> activitiesList = activityService.findAllActivities();
         model.addAttribute("activities", activitiesList);
+        model.addAttribute("isAdmin", LoginController.isAdmin());
         List<Reservation> reservations = activityService.findReservationsByActivity(1);
         return "/activity/activitiesList";
     }
