@@ -21,11 +21,15 @@
             Add Activity
         </a>
 
+        <p>
+            <a class="btn btn-primary" id="readButton" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Read
+            </a>
+        </p>
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
             <tr>
                 <th>Name</th>
-                <th>Description</th>
                 <th>Age Limit</th>
                 <th>Price</th>
                 <th>Action</th>
@@ -34,14 +38,19 @@
             <tbody>
             <tr th:each="activity : ${activities}">
                 <td th:text="${activity.name}" />
-                <td th:text="${activity.description}" />
                 <td th:text="${activity.ageLimit}" />
                 <td th:text="${activity.hourlyPrice}" />
                 <td>
-                    <!-- Read activity -->
-                    <a th:href="@{/activities/showFormForRead(activityId=${activity.id})}"
-                       class="btn btn-info btn-sm" id="readButton">Read
-                    </a>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+
+                            <div class="column">
+                                <h2>Description</h2>
+                                <p th:text="${activity.description}"></p>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Update activity -->
                     <a th:href="@{/activities/showFormForUpdate(activityId=${activity.id})}"
                        class="btn btn-info btn-sm">Update
