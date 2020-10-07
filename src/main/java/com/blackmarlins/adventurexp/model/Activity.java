@@ -87,7 +87,6 @@ public class Activity {
     public String toString() {
         return "Activity{" +
                 "id=" + id +
-                ", reservations=" + reservations +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", hourlyPrice=" + hourlyPrice +

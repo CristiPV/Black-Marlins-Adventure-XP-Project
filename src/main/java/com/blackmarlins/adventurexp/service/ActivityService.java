@@ -1,7 +1,6 @@
 package com.blackmarlins.adventurexp.service;
 
 import com.blackmarlins.adventurexp.model.Activity;
-import com.blackmarlins.adventurexp.model.reservation.Reservation;
 import com.blackmarlins.adventurexp.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,9 +36,5 @@ public class ActivityService {
 
     public void deleteActivity(Long id) {
         activityRepository.deleteById(id);
-    }
-
-    public List<Reservation> findReservationsByActivity(int i) {
-        return null;
     }
 }
