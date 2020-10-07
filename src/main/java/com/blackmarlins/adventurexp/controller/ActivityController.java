@@ -19,10 +19,12 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
+
     // Get All Activities
     @GetMapping("/list")
     public String findAll(Model model){
         model.addAttribute("activities", activityService.findAllActivities());
+        model.addAttribute("isAdmin", LoginController.isAdmin());
         return "activity/activity";
     }
 
