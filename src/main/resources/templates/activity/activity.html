@@ -65,7 +65,7 @@
                         <!-- Update activity -->
                         <a th:href="@{/activities/findById/(id=${activity.id})}" class="btn btn-info btn-sm" id="editButton">Update</a>
                         <!-- Delete activity -->
-                        <a th:href="@{/activities/delete/(id=${activity.id})}" class="btn btn-danger btn-sm" id="deleteButton">Delete</a>
+                        <a th:if="${isAdmin == true}" th:href="@{/activities/delete/(id=${activity.id})}" class="btn btn-danger btn-sm" id="deleteButton">Delete</a>
                         <!-- Make reservation associated with the given activity -->
                         <a th:href="@{/reservation(activityId=${activity.id})}"
                            class="btn btn-info btn-sm">Make reservation
