@@ -26,6 +26,13 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
+    @GetMapping("/reservation/list")
+    public String findAll(Model model) {
+        model.addAttribute("reservations", reservationService.findAllReservations());
+        model.addAttribute("isAdmin", LoginController.isAdmin());
+        return "reservation/reservationList";
+    }
+
     /**
      * Since {@code reservationFlow} is used in the {@code SessionAttributes} on the controller level, it informs
      * spring to treat our {@code ReservationFlow} as session scoped. This method will be invoked the very first
@@ -98,8 +105,12 @@ public class ReservationController {
     // Flow step 3 - review reservation
 
     @GetMapping("/reservation/review")
-    public String getReview(@ModelAttribute("reservationFlow") ReservationFlow reservationFlow) {
+    public String getReview(@ModelAttribute("reservationFlow") ReservationFlow reservationFlow,
+                            RedirectAttributes ra) {
+
         reservationFlow.setActive(ReservationFlow.Step.Review);
+        ra.addFlashAttribute("reservationFlow", reservationFlow);
+        reservationFlow.getReservation().setPrice(reservationService.calculatePrice(reservationFlow.getReservation()));
         return "reservation/review";
     }
 

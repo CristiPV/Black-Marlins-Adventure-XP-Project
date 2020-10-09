@@ -57,8 +57,6 @@ public class ReservationFlow {
     }
 
     public void setReservation(Reservation reservation) {
-        reservation.setPrice(reservation.getActivity().getHourlyPrice() *
-                reservation.getAmountOfPeople() * reservation.getHours());
         this.reservation = reservation;
     }
 

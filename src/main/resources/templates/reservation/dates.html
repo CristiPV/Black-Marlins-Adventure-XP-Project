@@ -16,11 +16,15 @@
         <div class="two fields">
             <div>
                 <label for="checkInDatePicker">Date</label>
-                <input id="checkInDatePicker" type="datetime-local" th:field="*{date}" />
+                <input id="checkInDatePicker" type="datetime" th:field="*{date}" />
             </div>
             <div>
                 <label for="numberOfHoursPicker">Duration (hours)</label>
                 <input id="numberOfHoursPicker" type="number" th:field="*{hours}" min="1"/>
+            </div>
+            <div>
+                <label for="amountOfPeoplePicker">Amount of People</label>
+                <input id="amountOfPeoplePicker" type="number" th:value="*{amountOfPeople}" th:field="*{amountOfPeople}">
             </div>
             <input type="hidden" th:field="*{date2}"/>
         </div>

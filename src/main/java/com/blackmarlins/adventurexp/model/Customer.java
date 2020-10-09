@@ -16,6 +16,15 @@ public class Customer {
     @Column(nullable = false)
     private String telephone;
 
+    public Customer() {
+    }
+
+    public Customer(String firstName, String lastName, String telephone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.telephone = telephone;
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -12,7 +12,7 @@
   <form th:action="@{/reservation/customer}" method="post" th:object="${reservationFlow.reservation.customer}">
     <div th:text="${reservationFlow.getActiveStepDescription().getDescription()}"></div>
     <div><input type="text" placeholder="First Name" th:value="*{firstName}" th:field="*{firstName}"></div>
-    <div><input type="text" placeholder="Last Name" th:value="*{telephone}" th:field="*{lastName}"></div>
+    <div><input type="text" placeholder="Last Name" th:value="*{lastName}" th:field="*{lastName}"></div>
     <div><input type="text" placeholder="Telephone" th:value="*{telephone}" th:field="*{telephone}"></div>
     <div class="field">
       <button type="submit" name="back">Back</button>

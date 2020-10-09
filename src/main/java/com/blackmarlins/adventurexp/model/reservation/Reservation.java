@@ -32,12 +32,21 @@ public class Reservation {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime date2;
     @Column(nullable = false)
-    private int amountOfPeople;
+    private int amountOfPeople = 1;
     @Column
     private double price;
 
     public Reservation() {
     }
+
+    public Reservation(Activity activity, Customer customer, LocalDateTime date, int hours, int amountOfPeople) {
+        this.activity = activity;
+        this.customer = customer;
+        this.date = date;
+        this.hours = hours;
+        this.amountOfPeople = amountOfPeople;
+    }
+
 
     /*public static double getTaxPercentage() {
         return TAX_PERCENTAGE;
