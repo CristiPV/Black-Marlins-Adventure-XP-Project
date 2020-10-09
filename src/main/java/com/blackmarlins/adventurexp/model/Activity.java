@@ -23,17 +23,17 @@ public class Activity {
     private Double hourlyPrice;
     private int ageLimit;
 
-    public Activity(){
+    public Activity() {
         this.id = Long.valueOf(0);
         this.reservations = new ArrayList<>();
     }
 
     public List<Reservation> getReservations() {
-        return reservations;
+        return this.reservations;
     }
 
     public void setReservations(List<Reservation> reservations) {
-        this.reservations.addAll(reservations);
+        this.reservations = reservations;
     }
 
     public Activity(String name, String description, Double price, int ageLimit) {
