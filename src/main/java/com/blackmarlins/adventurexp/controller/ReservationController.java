@@ -130,4 +130,12 @@ public class ReservationController {
         sessionStatus.setComplete();
         return "reservation/completed";
     }
+
+    //DElETE
+
+    @RequestMapping(value="/cancel", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String cancel(Long id){
+        reservationService.cancel(id);
+        return "redirect:/reservation";
+    }
 }

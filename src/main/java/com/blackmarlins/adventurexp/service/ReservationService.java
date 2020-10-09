@@ -21,4 +21,8 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
+    public void cancel(Long id) {
+        reservationRepository.deleteById(id);
+
+    }
 }
