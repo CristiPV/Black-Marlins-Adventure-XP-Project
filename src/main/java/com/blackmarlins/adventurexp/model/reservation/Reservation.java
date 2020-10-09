@@ -9,7 +9,9 @@ import java.time.LocalDateTime;
 @Entity
 public class Reservation {
 
-    public static final double TAX_PERCENTAGE = 0.20;
+   // public static final double TAX_PERCENTAGE = 0.20;
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,13 +31,17 @@ public class Reservation {
     private int hours = 1;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime date2;
+    @Column(nullable = false)
+    private int amountOfPeople;
+    @Column
+    private double price;
 
     public Reservation() {
     }
 
-    public static double getTaxPercentage() {
+    /*public static double getTaxPercentage() {
         return TAX_PERCENTAGE;
-    }
+    }*/
 
     public Activity getActivity() {
         return activity;
@@ -62,9 +68,9 @@ public class Reservation {
         this.date = date;
     }
 
-    public Double getTotalPrice() {
+    /*public Double getTotalPrice() {
         return (this.hours * this.activity.getHourlyPrice()) * (1 + TAX_PERCENTAGE);
-    }
+    }*/
 
     public int getHours() {
         return hours;
@@ -82,6 +88,22 @@ public class Reservation {
         this.date2 = this.date.plusHours(this.hours);
     }
 
+    public int getAmountOfPeople() {
+        return amountOfPeople;
+    }
+
+    public void setAmountOfPeople(int amountOfPeople) {
+        this.amountOfPeople = amountOfPeople;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Reservation{" +
@@ -89,6 +111,8 @@ public class Reservation {
                 ", customer=" + customer +
                 ", date=" + date +
                 ", hours=" + hours +
+                ", amountOfPeople=" + amountOfPeople +
+                ", price=" + price +
                 '}';
     }
 }

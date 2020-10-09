@@ -18,7 +18,7 @@
     <h3>Duration: </h3>
     <span th:text="${reservationFlow.reservation.hours}"></span> hours
     <h3>Total Price: </h3>
-    <span th:text="${#numbers.formatDecimal(reservationFlow.reservation.getTotalPrice(), 0, 'COMMA', 2, 'POINT')}"></span>
+    <span th:text="${reservationFlow.reservation.price}"></span>
     <div>
         <form id="form" th:action="@{/reservation/review}" method="post">
             <div>

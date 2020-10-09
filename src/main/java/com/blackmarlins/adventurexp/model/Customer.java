@@ -13,6 +13,7 @@ public class Customer {
 
     @Column(nullable = false) // it accepts null values
     private String lastName;
+    @Column(nullable = false)
     private String telephone;
 
     public String getFirstName() {
