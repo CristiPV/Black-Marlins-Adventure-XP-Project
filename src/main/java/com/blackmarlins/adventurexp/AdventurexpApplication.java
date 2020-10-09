@@ -13,4 +13,8 @@ public class AdventurexpApplication {
         SpringApplication.run(AdventurexpApplication.class, args);
     }
 
+    @PostConstruct
+    public void started() {
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+    }
 }
