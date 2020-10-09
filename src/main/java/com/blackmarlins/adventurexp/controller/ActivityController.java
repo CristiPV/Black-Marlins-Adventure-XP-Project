@@ -33,7 +33,12 @@ public class ActivityController {
     @ResponseBody
     public Activity findById(Long id)
     {
-        return activityService.findActivityById(id);
+        Activity activity = activityService.findActivityById(id);
+        /* clears the list of the reservations attribute in order to
+        avoid stack overflow error, as it was entering into a recursive circle
+        from reservations to activity... */
+        activity.getReservations().clear();
+        return activity;
     }
 
     // Add Activity

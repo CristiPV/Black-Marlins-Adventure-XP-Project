@@ -4,7 +4,7 @@ import com.blackmarlins.adventurexp.model.Activity;
 import com.blackmarlins.adventurexp.model.Customer;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Reservation {
@@ -23,10 +23,12 @@ public class Reservation {
     @Embedded
     private Customer customer = new Customer();
     @Column(nullable = false)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate date = LocalDate.now();
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime date = LocalDateTime.now();
     @Column(nullable = false)
     private int hours = 1;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime date2;
 
     public Reservation() {
     }
@@ -52,11 +54,11 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -70,6 +72,14 @@ public class Reservation {
 
     public void setHours(int hours) {
         this.hours = hours;
+    }
+
+    public LocalDateTime getDate2() {
+        return date2;
+    }
+
+    public void setDate2() {
+        this.date2 = this.date.plusHours(this.hours);
     }
 
     @Override

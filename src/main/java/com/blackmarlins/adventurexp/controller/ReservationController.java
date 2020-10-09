@@ -10,7 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 
 @Controller
 @SessionAttributes("reservationFlow")
@@ -45,8 +46,6 @@ public class ReservationController {
     @GetMapping("/reservation")
     public String getDateForm(@RequestParam(value = "activityId") Long activityId,
                               @ModelAttribute("reservationFlow") ReservationFlow reservationFlow, Model model) {
-        LocalDate now = LocalDate.now();
-        model.addAttribute("now", now);
         reservationFlow.enterStep(ReservationFlow.Step.Dates);
         Activity activity = activityService.findActivityById(activityId);
         reservationFlow.getReservation().setActivity(activity);
@@ -57,6 +56,8 @@ public class ReservationController {
     public String dates(@ModelAttribute("reservationFlow") ReservationFlow reservationFlow, RedirectAttributes redirectAttributes) {
         reservationFlow.enterStep(ReservationFlow.Step.Dates);
         reservationFlow.completeStep(ReservationFlow.Step.Dates);
+        // set value for date2
+        reservationFlow.getReservation().setDate2();
         redirectAttributes.addFlashAttribute("reservationFlow", reservationFlow);
         return "redirect:/reservation/customer";
     }
