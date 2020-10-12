@@ -16,6 +16,20 @@ $('document').ready(function() {
         $('#editModal').modal();
     });
 
+    $('table #readInfoButton').on('click', function(event) {
+            event.preventDefault();
+
+            var href = $(this).attr('href');
+
+            $.get(href, function(activity, status) {
+                $('#id').val(activity.id);
+                $('#description').val(activity.description);
+                $('#name').val(activity.name);
+            });
+
+            $('#infoModal').modal();
+        });
+
 
 
     $('table #deleteButton').on('click',function(event) {
