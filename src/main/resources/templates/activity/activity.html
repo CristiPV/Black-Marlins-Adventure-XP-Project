@@ -15,12 +15,33 @@
 
     <!-- Link to custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/productNavbar.css">
 
     <title>Activities</title>
 
 </head>
 
 <body>
+    <section id="navigationContainer">
+        <nav id="navBar">
+            <div id="navBar-left">
+                <a href="/login" class="navChild">
+                    <span>Login</span>
+                    <hr class="hoverLine">
+                </a>
+            </div>
+            <div id="navBar-right">
+                <a href="/activities/list" class="navChild">
+                    <span>Activities</span>
+                    <hr class="hoverLine">
+                </a>
+                <a href="/reservation/list" class="navChild">
+                    <span>Reservations</span>
+                    <hr class="hoverLine">
+                </a>
+            </div>
+        </nav>
+    </section>
 
     <!-- Main content -->
     <div class="container">
