@@ -87,8 +87,8 @@
                         <!-- Make reservation associated with the given activity -->
                         <a th:href="@{/reservation(activityId=${activity.id})}" class="btn btn-info btn-sm" id="reservationButton">Make reservation</a><br>
                         <!-- Delete activity -->
-                        <!--th:if="${isAdmin == true}"-->
-                        <a th:href="@{/activities/delete/(id=${activity.id})}" class="btn btn-danger btn-sm" id="deleteButton">Delete</a>
+
+                        <a th:if="${isAdmin == true}" th:href="@{/activities/delete/(id=${activity.id})}" class="btn btn-danger btn-sm" id="deleteButton">Delete</a>
                     </div>
                 </td>
             </tr>
