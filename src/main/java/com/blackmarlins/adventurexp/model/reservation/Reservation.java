@@ -37,6 +37,7 @@ public class Reservation {
     private double price;
 
     public Reservation() {
+        this.id = Long.valueOf(0);
     }
 
     public Reservation(Activity activity, Customer customer, LocalDateTime date, int hours, int amountOfPeople) {
@@ -51,6 +52,14 @@ public class Reservation {
     /*public static double getTaxPercentage() {
         return TAX_PERCENTAGE;
     }*/
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Activity getActivity() {
         return activity;
