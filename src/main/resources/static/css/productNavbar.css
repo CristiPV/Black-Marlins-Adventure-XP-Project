@@ -26,7 +26,7 @@
     font-size: 17px;
     height: 4vh;
     width: fit-content;
-    padding: 0.5vh 0.6vh;
+    padding: 0.5vh 10px;
     color: white;
     position: relative; /* Used to align the hoverLine element properly */
 }
@@ -47,7 +47,14 @@
 #navBar a:hover .hoverLine
 {
     display: inline-block;
-    background-color: #00B86B;
+    background-color: #ffffff;
+}
+
+a:hover
+{
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5vh 6px !important;
 }
 
 #navBar .navChild
