@@ -1,27 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/list.css">
+    <link rel="stylesheet" href="/css/form.css">
     <title>Completed</title>
 </head>
 
-<body>
+<body style="padding-top:100px" >
 
-    <!-- just for testing the sidebar
-    <--sidebar start
-    <aside>
-        <div th:replace="fragments/sidebar :: sidebar"></div>
-    </aside> -->
-
-    <div>
-        <h2>Success!</h2>
-        <p>You have now made a reservation.</p>
+<div class='signup-container'>
+    <div class='left-container'>
+        <h1 th:text="${reservationFlow.reservation.activity.name}"></h1>
     </div>
-    <!-- Back to activities list button -->
-    <a th:href="@{/activities/list}" class="btn btn-primary btn-sm mb-3" >Back to Activity List</a>
-
+    <div class='right-container' style="background: #006F40">
+        <header>
+            <h1>Success!</h1>
+            <div class='set'>
+                <div class='pets-breed'>
+                    <h2>You have now made a reservation.</h2>
+                </div>
+            </div>
+        </header>
+        <footer>
+            <div class='set'>
+                <a th:href="@{/activities/list}"><button type="submit" id="next">Back to List</button></a>
+            </div>
+        </footer>
+    </div>
+</div>
 </body>
 </html>

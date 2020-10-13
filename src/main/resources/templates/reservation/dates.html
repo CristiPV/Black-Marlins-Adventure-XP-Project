@@ -1,38 +1,89 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/css/list.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link th:rel="stylesheet" th:href="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>
+    <link rel="stylesheet" href="/css/form.css">
     <title>Reservation</title>
 </head>
 
-<body>
-    <div th:text="${reservationFlow.getActiveStepDescription().getDescription()}"></div>
+<body style="background: white; padding-top:100px">
     <form id="form" class="ui form" th:action="@{/reservation/dates}" method="post"
           th:object="${reservationFlow.reservation}">
-
-        <div class="two fields">
-            <div>
-                <label for="checkInDatePicker">Date</label>
-                <input id="checkInDatePicker" type="datetime" th:field="*{date}" />
+        <div class='signup-container'>
+            <div class='left-container'>
+                <h1 th:text="${reservationFlow.reservation.activity.name}"></h1>
             </div>
-            <div>
-                <label for="numberOfHoursPicker">Duration (hours)</label>
-                <input id="numberOfHoursPicker" type="number" th:field="*{hours}" min="1"/>
+            <div class='right-container' style="background: #006F40">
+                <header>
+                    <h1 th:text="${reservationFlow.getActiveStepDescription().getDescription()}"></h1>
+                    <div class='set'>
+                        <div class="pets-name">
+                            <label for="date">Date:</label>
+                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                <input id="date" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                                       th:field="*{date}" th:value="*{date}" required>
+                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='set'>
+                        <div class='pets-breed'>
+                            <label for='pets-breed'>Duration in hours</label>
+                            <input id='pets-breed' th:field="*{hours}" min="1" type='number'>
+                        </div>
+                        <div class='pets-birthday'>
+                            <label for='pets-birthday'>Amount of people</label>
+                            <input id='pets-birthday' type="number" th:value="*{amountOfPeople}" th:field="*{amountOfPeople}" min="1">
+                        </div>
+                    </div>
+                </header>
+                <footer>
+                    <div class='set'>
+                        <button id='back' type="submit" name="cancel">Cancel</button>
+                        <button id='next' type="submit">Next</button>
+                    </div>
+                </footer>
             </div>
-            <div>
-                <label for="amountOfPeoplePicker">Amount of People</label>
-                <input id="amountOfPeoplePicker" type="number" th:value="*{amountOfPeople}" th:field="*{amountOfPeople}">
-            </div>
-            <input type="hidden" th:field="*{date2}"/>
-        </div>
-
-        <div class="field">
-            <button class="ui button" type="submit" name="cancel">Cancel</button>
-            <button class="ui button" type="submit">Next</button>
         </div>
     </form>
+
+
+    <!-- Scripts to implement the datetimepicker -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/moment/moment.min.js}"></script>
+    <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+
+    <script>
+        $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+            icons: {
+                time: 'far fa-clock',
+                date: 'far fa-calendar',
+                up: 'fas fa-arrow-up',
+                down: 'fas fa-arrow-down',
+                previous: 'fas fa-chevron-left',
+                next: 'fas fa-chevron-right',
+                today: 'far fa-calendar-check-o',
+                clear: 'far fa-trash',
+                close: 'far fa-times'
+            } });
+
+        $('#datetimepicker1').datetimepicker({
+            format: 'DD/MM/YYYY HH:mm',
+            enabledHours: [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            stepping: 30,
+            sideBySide: true,
+            calendarWeeks: true,
+            useCurrent: false
+        });
+    </script>
+
 </body>
 </html>

@@ -4,14 +4,12 @@ import com.blackmarlins.adventurexp.model.Activity;
 import com.blackmarlins.adventurexp.model.Customer;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class Reservation {
 
    // public static final double TAX_PERCENTAGE = 0.20;
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,12 +23,12 @@ public class Reservation {
     @Embedded
     private Customer customer = new Customer();
     @Column(nullable = false)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime date = LocalDateTime.now();
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    private Date date =  new Date(System.currentTimeMillis());
     @Column(nullable = false)
     private int hours = 1;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime date2;
+    /*@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime date2;*/
     @Column(nullable = false)
     private int amountOfPeople = 1;
     @Column
@@ -39,7 +37,7 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Activity activity, Customer customer, LocalDateTime date, int hours, int amountOfPeople) {
+    public Reservation(Activity activity, Customer customer, Date date, int hours, int amountOfPeople) {
         this.activity = activity;
         this.customer = customer;
         this.date = date;
@@ -69,15 +67,15 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    /*public Double getTotalPrice() {
+   /* public Double getTotalPrice() {
         return (this.hours * this.activity.getHourlyPrice()) * (1 + TAX_PERCENTAGE);
     }*/
 
@@ -89,13 +87,17 @@ public class Reservation {
         this.hours = hours;
     }
 
+/*
     public LocalDateTime getDate2() {
         return date2;
     }
+*/
 
+/*
     public void setDate2() {
         this.date2 = this.date.plusHours(this.hours);
     }
+*/
 
     public int getAmountOfPeople() {
         return amountOfPeople;
@@ -111,6 +113,13 @@ public class Reservation {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    /*
+    *   Calculates the total price for this reservation
+    */
+    public double calculateTotalPrice() {
+        return this.getActivity().getHourlyPrice() * this.getHours();
     }
 
     @Override

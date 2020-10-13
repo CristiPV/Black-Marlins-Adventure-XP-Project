@@ -16,6 +16,16 @@ public class Customer {
     @Column(nullable = false)
     private String telephone;
 
+    public Boolean getNew() {
+        return isNew;
+    }
+
+    public void setNew(Boolean aNew) {
+        isNew = aNew;
+    }
+
+    private Boolean isNew;
+
     public Customer() {
     }
 
