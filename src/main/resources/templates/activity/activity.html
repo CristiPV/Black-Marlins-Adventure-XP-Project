@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="utf-8">
 
@@ -13,9 +12,13 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <link href='https://fonts.googleapis.com/css?family=Share Tech Mono' rel='stylesheet'>
+
     <!-- Link to custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/productNavbar.css">
+    <link rel="stylesheet" href="/css/popup.css">
+
 
     <title>Activities</title>
 
@@ -102,38 +105,38 @@
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel" style="font-size: x-large">New Activity</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div>
+                    <h5>New Activity</h5>
                 </div>
                 <div class="modal-body">
                     <form th:action="@{/activities/addNew}" method="post">
 
                         <div class="form-group">
-                        <label for="nameAdd" class="col-form-label">Name:</label>
-                        <input type="text" class="form-control" id="nameAdd" name="name" required>
+                            <label for="nameAdd" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="nameAdd" name="name" placeholder="Activity's name . . ." style="height: 40px" required>
                         </div>
 
                         <div class="form-group">
                             <label for="descriptionAdd" class="col-form-label">Description:</label>
-                            <input type="text" class="form-control" id="descriptionAdd" name="description">
+                            <input type="text" class="form-control" id="descriptionAdd" name="description" placeholder="Activity's description . . ." style="height: 120px">
                         </div>
 
-                        <div class="form-group">
-                            <label for="hourlyPriceAdd" class="col-form-label">Hourly Price:</label>
-                            <input type="number" step="0.01" class="form-control" id="hourlyPriceAdd" name="hourlyPrice" required>
+                        <div class="flex-container">
+                            <div class="form-group">
+                                <label for="hourlyPriceAdd" class="col-form-label">Hourly Price:</label>
+                                <input type="number" step="0.01" class="form-control" id="hourlyPriceAdd" name="hourlyPrice" placeholder="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ageLimitAdd" class="col-form-label">Age Limit:</label>
+                                <input type="number" class="form-control" id="ageLimitAdd" name="ageLimit" min="0" placeholder="0">
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="ageLimitAdd" class="col-form-label">Age Limit:</label>
-                            <input type="number" class="form-control" id="ageLimitAdd" name="ageLimit" min="0">
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="flex-container">
+                            <div class="form-group">
+                                <button type="submit">Submit</button>
+                                <button type="button" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </form>
                     <!-- End of modal body -->
@@ -148,10 +151,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel" style="font-size: x-large">Update Activity</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5>Update Activity</h5>
                 </div>
                 <div class="modal-body">
                     <form th:action="@{/activities/update}" method="put">
@@ -162,27 +162,30 @@
 
                         <div class="form-group">
                             <label for="nameEdit" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="nameEdit" name="name" required>
+                            <input type="text" class="form-control" id="nameEdit" name="name" style="height: 40px" required>
                         </div>
 
                         <div class="form-group">
                             <label for="descriptionEdit" class="col-form-label">Description:</label>
-                            <input type="text" class="form-control" id="descriptionEdit" name="description">
+                            <input type="text" class="form-control" id="descriptionEdit" name="description" style="height: 120px">
                         </div>
 
-                        <div class="form-group">
-                            <label for="hourlyPriceEdit" class="col-form-label">Hourly Price:</label>
-                            <input type="number" step="0.01" class="form-control" id="hourlyPriceEdit" name="hourlyPrice" required>
+                        <div class="flex-container">
+                            <span class="form-group">
+                                <label for="hourlyPriceEdit" class="col-form-label">Hourly Price:</label>
+                                <input type="number" step="0.01" class="form-control" id="hourlyPriceEdit" name="hourlyPrice" required>
+                            </span>
+                            <span class="form-group">
+                                <label for="ageLimitEdit" class="col-form-label">Age Limit:</label>
+                                <input type="number" class="form-control" id="ageLimitEdit" name="ageLimit" min="0">
+                            </span>
                         </div>
 
-                        <div class="form-group">
-                            <label for="ageLimitEdit" class="col-form-label">Age Limit:</label>
-                            <input type="number" class="form-control" id="ageLimitEdit" name="ageLimit" min="0">
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="flex-container">
+                            <div class="form-group">
+                                <button type="submit">Submit</button>
+                                <button type="button" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </form>
                     <!-- End of modal body -->
