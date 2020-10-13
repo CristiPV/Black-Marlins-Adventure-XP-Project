@@ -144,9 +144,9 @@ public class ReservationController {
 
     //DElETE
 
-    @RequestMapping(value="/cancel", method = {RequestMethod.DELETE, RequestMethod.GET})
+    @RequestMapping(value="/reservation/cancel", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String cancel(Long id){
         reservationService.cancel(id);
-        return "redirect:/reservation";
+        return "redirect:/reservation/list";
     }
 }

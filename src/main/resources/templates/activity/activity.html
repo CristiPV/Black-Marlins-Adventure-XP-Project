@@ -13,14 +13,38 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <!-- JS file that handles the pop-up forms -->
+    <script src="/js/activity.js"></script>
+
     <!-- Link to custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/productNavbar.css">
 
     <title>Activities</title>
 
 </head>
 
 <body>
+    <section id="navigationContainer">
+        <nav id="navBar">
+            <div id="navBar-left">
+                <a href="/login" class="navChild">
+                    <span>Login</span>
+                    <hr class="hoverLine">
+                </a>
+            </div>
+            <div id="navBar-right">
+                <a href="/activities/list" class="navChild">
+                    <span>Activities</span>
+                    <hr class="hoverLine">
+                </a>
+                <a href="/reservation/list" class="navChild">
+                    <span>Reservations</span>
+                    <hr class="hoverLine">
+                </a>
+            </div>
+        </nav>
+    </section>
 
     <!-- Main content -->
     <div class="container">
@@ -29,9 +53,11 @@
 
         <div id="add-read-buttons" align="left">
             <!-- Add new activity button-->
+
             <input type="button" id="addButton" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#addModal" value="Add activity"> 
             <!-- Expand description button-->
             <input type="button" id="readButton" class="btn btn-primary btn-sm mb-3" value="Read" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="background: #006F40">
+
         </div>
 
         <!-- Activities Table -->
@@ -47,34 +73,67 @@
             </thead>
             <tbody>
             <tr th:each="activity : ${activities}">
+
                 <td th:text="${activity.name}">Name</td>
                 <td th:text="${activity.description}">Description</td>
                 <td th:text="${activity.hourlyPrice}">Hourly Price</td>
                 <td th:text="${activity.ageLimit}">Age Limit</td>
                 <td>
-                    <!-- Read button functionality -->
-                    <div class="collapse" id="collapseExample">
-                        <div class="card card-body">
-                            <div class="column">
-                                <h2>Description</h2>
-                                <p th:text="${activity.description}"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="btn-group">
+                    <div class="btn-group btn-group-edit">
+                        <!-- Expand description button-->
+                        <a th:href="@{/activities/findById/(id=${activity.id})}" class="btn btn-primary btn-sm" id="readInfoButton">Info</a><br>
                         <!-- Update activity -->
-                        <a th:href="@{/activities/findById/(id=${activity.id})}" class="btn btn-info btn-sm" id="editButton">Update</a>
-                        <!-- Delete activity -->
-                        <!--th:if="${isAdmin == true}"--> <a th:href="@{/activities/delete/(id=${activity.id})}" class="btn btn-danger btn-sm" id="deleteButton">Delete</a>
+                        <a th:href="@{/activities/findById/(id=${activity.id})}" class="btn btn-primary btn-sm" id="editButton">Update</a><br>
                         <!-- Make reservation associated with the given activity -->
-                        <a th:href="@{/reservation(activityId=${activity.id})}"
-                           class="btn btn-info btn-sm">Make reservation
-                        </a>
+                        <a th:href="@{/reservation(activityId=${activity.id})}" class="btn btn-info btn-sm" id="reservationButton">Make reservation</a><br>
+                        <!-- CREATE BTN FOR RESERVATION LIST -->
+                        <a th:href="@{/activities/reservations/(id=${activity.id})}" class="btn btn-info btn-sm" id="reservationListButton">Reservation list</a><br>
+                        <!-- Delete activity -->
+                        <!--th:if="${isAdmin == true}"-->
+                        <a th:href="@{/activities/delete/(id=${activity.id})}" class="btn btn-danger btn-sm" id="deleteButton">Delete</a>
                     </div>
                 </td>
             </tr>
             </tbody>
         </table>
+    </div>
+
+    <!-- Info Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Description</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/activities/findById}" method="get">
+
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="id" name="id">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nameEdit" class="col-form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descriptionEdit" class="col-form-label">Description:</label>
+                            <textarea cols="5" type="text" class="form-control" id="description" name="description" readonly></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                    <!-- End of modal body -->
+                </div>
+                <!-- End of modal content -->
+            </div>
+        </div>
     </div>
 
     <!-- Add Modal -->
@@ -191,9 +250,6 @@
             </div>
         </div>
     </div>
-
-    <!-- JS file that handles the pop-up forms -->
-    <script src="/js/activity.js"></script>
 
 </body>
 </html>
