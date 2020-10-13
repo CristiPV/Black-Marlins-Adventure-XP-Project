@@ -64,7 +64,7 @@ public class ReservationController {
         reservationFlow.enterStep(ReservationFlow.Step.Dates);
         reservationFlow.completeStep(ReservationFlow.Step.Dates);
         // set value for date2
-        reservationFlow.getReservation().setDate2();
+        /*reservationFlow.getReservation().setDate2();*/
         redirectAttributes.addFlashAttribute("reservationFlow", reservationFlow);
         return "redirect:/reservation/customer";
     }

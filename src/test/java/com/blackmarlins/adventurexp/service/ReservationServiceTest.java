@@ -22,7 +22,7 @@ class ReservationServiceTest {
     @Autowired
     ReservationService reservationService;
 
-    private static Stream<Arguments> calculatePriceTestArguments()
+    /*private static Stream<Arguments> calculatePriceTestArguments()
     {
         return Stream.of(
                 Arguments.of(new Reservation(new Activity("test1", "desc1", 2.5, 5), new Customer("c1", "c1", "t1"), LocalDateTime.now(), 2, 10), 50.0, true),
@@ -39,5 +39,5 @@ class ReservationServiceTest {
     void calculatePriceTest(Reservation reservation, double result , boolean expectedMatch)
     {
         assertThat(reservationService.calculatePrice(reservation) == result).isEqualTo(expectedMatch);
-    }
+    }*/
 }

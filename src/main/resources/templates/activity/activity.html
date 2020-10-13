@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -53,7 +53,11 @@
 
         <div id="add-read-buttons" align="left">
             <!-- Add new activity button-->
-            <input type="button" id="addButton" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#addModal" value="Add activity">
+
+            <input type="button" id="addButton" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#addModal" value="Add activity"> 
+            <!-- Expand description button-->
+            <input type="button" id="readButton" class="btn btn-primary btn-sm mb-3" value="Read" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="background: #006F40">
+
         </div>
 
         <!-- Activities Table -->

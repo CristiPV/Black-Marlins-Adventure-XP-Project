@@ -1,0 +1,151 @@
+body {
+    align-items: flex-start;
+    padding-top: 100px;
+    color: white;
+    display: grid;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    font-weight: 400;
+    height: 100vh;
+    justify-items: center;
+    /*weight: 100vw;*/
+}
+.signup-container {
+    display: grid;
+    grid-template-areas: "left right";
+    max-width: 900px;
+}
+.left-container {
+    background: #a5868b;
+    overflow: hidden;
+    padding: 40px 0 0 0;
+    position: relative;
+    text-align: center;
+    width: 300px;
+}
+.left-container h1 {
+    color: white; /*rgba(0, 0, 0, 0.8);*/
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 24px;
+}
+.left-container h1 i {
+    border-radius: 50%;
+    color: #198908;
+    font-size: 24px;
+    margin-right: 5px;
+    padding: 10px;
+    transform: rotate(-45deg);
+}
+.left-container .puppy {
+    bottom: -5px;
+    position: absolute;
+    text-align: center;
+}
+.left-container .puppy:before {
+    background: #807182;
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: .4;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+.left-container img {
+    filter: sepia(100%);
+    width: 70%;
+}
+.right-container {
+    display: grid;
+    grid-template-areas: "." ".";
+    width: 500px;
+}
+.right-container h1:nth-of-type(1) {
+    color: white;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 28px;
+    font-weight: 600;
+}
+.right-container .set {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+.right-container input {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 5px;
+}
+.right-container input, .right-container label {
+    font-family: 'Share Tech Mono', monospace;
+}
+.right-container header {
+    padding: 40px;
+}
+.right-container label, .right-container input, .right-container .pets-photo {
+    width: 178px;
+}
+.right-container .pets-photo {
+    align-items: center;
+    display: grid;
+    grid-template-areas: ". .";
+}
+.right-container .pets-photo button {
+    border: none;
+    border-radius: 50%;
+    height: 38px;
+    margin-right: 10px;
+    outline: none;
+    width: 38px;
+}
+.right-container .pets-photo button i {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 16px;
+}
+.right-container .pets-weight .radio-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.right-container footer {
+    align-items: center;
+    background: #fff;
+    display: grid;
+    padding: 5px 40px;
+}
+.right-container footer button {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    height: 38px;
+    line-height: 38px;
+    width: 100px;
+    border-radius: 19px;
+    font-family: 'Share Tech Mono', monospace;
+}
+.right-container footer #back {
+    background: #fff;
+    transition: .2s all ease-in-out;
+}
+.right-container footer #back:hover {
+    background: #171A2B;
+    color: white;
+}
+.right-container footer #next {
+    background: #807182;
+    border: 1px solid transparent;
+    color: #fff;
+}
+.right-container footer #next:hover {
+    background: #171A2B;
+}
+.pets-name label, .pets-breed label, .pets-birthday label, .pets-gender label, .pets-spayed-neutered label, .pets-weight label {
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+}
+span {
+    color: white;
+    font-family: 'Share Tech Mono', monospace;
+}

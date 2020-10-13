@@ -1,22 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/static/css/list.css">
+  <link rel="stylesheet" href="/css/form.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <title>Reservation</title>
 </head>
 
-<body>
+<body style="padding-top:100px">
   <form th:action="@{/reservation/customer}" method="post" th:object="${reservationFlow.reservation.customer}">
-    <div th:text="${reservationFlow.getActiveStepDescription().getDescription()}"></div>
-    <div><input type="text" placeholder="First Name" th:value="*{firstName}" th:field="*{firstName}"></div>
-    <div><input type="text" placeholder="Last Name" th:value="*{lastName}" th:field="*{lastName}"></div>
-    <div><input type="text" placeholder="Telephone" th:value="*{telephone}" th:field="*{telephone}"></div>
-    <div class="field">
-      <button type="submit" name="back">Back</button>
-      <button type="submit">Next</button>
+    <div class='signup-container'>
+      <div class='left-container'>
+          <h1 th:text="${reservationFlow.reservation.activity.name}"></h1>
+      </div>
+      <div class='right-container' style="background: #006F40">
+        <header>
+          <h1 th:text="${reservationFlow.getActiveStepDescription().getDescription()}"></h1>
+          <div class='set'>
+            <div class='pets-breed'>
+              <label for='pets-breed'>First Name</label>
+              <input id='pets-breed' placeholder="First Name" th:value="*{firstName}" th:field="*{firstName}">
+            </div>
+            <div class='pets-birthday'>
+              <label for='pets-birthday'>Last Name</label>
+              <input id='pets-birthday' placeholder="Last Name" th:value="*{lastName}" th:field="*{lastName}">
+            </div>
+          </div>
+          <div class='set'>
+            <div class='pets-breed'>
+              <label for='pets-weight'>Telephone</label>
+              <input id='pets-weight' placeholder="Telephone" th:value="*{telephone}" th:field="*{telephone}">
+            </div>
+            <div class='pets-breed'>
+              <label for='pets-weight'>New customer</label>
+              <input type="checkbox" th:field="*{new}" style="width: 20px"/>
+            </div>
+          </div>
+        </header>
+        <footer>
+          <div class='set'>
+            <button id='back' type="submit" name="back">Back</button>
+            <button id='next' type="submit">Next</button>
+          </div>
+        </footer>
+      </div>
     </div>
   </form>
 </body>
