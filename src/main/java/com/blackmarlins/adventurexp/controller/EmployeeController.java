@@ -17,7 +17,7 @@ public class EmployeeController {
     // Get All Employees
     @GetMapping("/list")
     public String findAll(Model model){
-        model.addAttribute("activities", employeeService.findAllEmployees());
+        model.addAttribute("employees", employeeService.findAllEmployees());
         model.addAttribute("isAdmin", LoginController.isAdmin());
         return "employee/employee";
     }
