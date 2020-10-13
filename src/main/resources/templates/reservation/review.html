@@ -9,35 +9,36 @@
 </head>
 
 <body style="padding-top:100px">
-<div class='signup-container'>
+<div class='form-container'>
     <div class='left-container'>
         <h1 th:text="${reservationFlow.reservation.activity.name}"></h1>
     </div>
-    <div class='right-container' style="background: #006F40">
+    <div class='right-container'>
         <header>
             <h1 th:text="${reservationFlow.getActiveStepDescription().getDescription()}"></h1>
             <div class='set'>
-                <div class='pets-name'>
-                    <label>What</label>
-                    <span th:text="${reservationFlow.reservation.activity.name}"></span>
+                <div class="what">
+                    <label for="what" >What</label>
+                    <span id="what" th:text="${reservationFlow.reservation.activity.name}"></span>
                 </div>
             </div>
             <div class='set'>
-                <div class='pets-name'>
-                    <label>When</label>
-                    <span th:text="${#dates.format(reservationFlow.reservation.date, 'dd-MMM-yyyy HH:mm')}"></span>                </div>
-            </div>
-            <div class='set'>
-                <div class='pets-name'>
-                    <label for='pets-name'>Duration</label>
-                    <span th:text="${reservationFlow.reservation.hours}"></span>
+                <div class="when">
+                    <label for="when">When</label>
+                    <span id="when" th:text="${#dates.format(reservationFlow.reservation.date, 'dd-MMM-yyyy HH:mm')}"></span>
                 </div>
             </div>
             <div class='set'>
-                <div class='pets-name'>
-                <label for='pets-name'>Total price</label>
-                    <span th:text="${reservationFlow.reservation.calculateTotalPrice()}"></span>
+                <div class="duration-review">
+                    <label for="duration-review">Duration</label>
+                    <span id="duration-review" th:text="${reservationFlow.reservation.hours}"></span>
+                </div>
             </div>
+            <div class='set'>
+                <div class="total-price">
+                    <label for="total-price">Total price</label>
+                    <span id="total-price" th:text="${reservationFlow.reservation.calculateTotalPrice()}"></span>
+                </div>
             </div>
         </header>
         <footer>

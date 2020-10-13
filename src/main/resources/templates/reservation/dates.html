@@ -13,18 +13,18 @@
 <body style="background: white; padding-top:100px">
     <form id="form" class="ui form" th:action="@{/reservation/dates}" method="post"
           th:object="${reservationFlow.reservation}">
-        <div class='signup-container'>
+        <div class='form-container'>
             <div class='left-container'>
                 <h1 th:text="${reservationFlow.reservation.activity.name}"></h1>
             </div>
-            <div class='right-container' style="background: #006F40">
+            <div class='right-container'>
                 <header>
                     <h1 th:text="${reservationFlow.getActiveStepDescription().getDescription()}"></h1>
                     <div class='set'>
-                        <div class="pets-name">
-                            <label for="date">Date:</label>
+                        <div class='date'>
+                            <label for='date'>Date</label>
                             <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                <input id="date" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                                <input id='date' type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
                                        th:field="*{date}" th:value="*{date}" required>
                                 <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
@@ -33,13 +33,13 @@
                         </div>
                     </div>
                     <div class='set'>
-                        <div class='pets-breed'>
-                            <label for='pets-breed'>Duration in hours</label>
-                            <input id='pets-breed' th:field="*{hours}" min="1" type='number'>
+                        <div class='duration'>
+                            <label for='duration'>Duration in hours</label>
+                            <input id='duration' th:field="*{hours}" min="1" type='number'>
                         </div>
-                        <div class='pets-birthday'>
-                            <label for='pets-birthday'>Amount of people</label>
-                            <input id='pets-birthday' type="number" th:value="*{amountOfPeople}" th:field="*{amountOfPeople}" min="1">
+                        <div class='amount-people'>
+                            <label for='amount-people'>Number of people</label>
+                            <input id='amount-people' type="number" th:value="*{amountOfPeople}" th:field="*{amountOfPeople}" min="1">
                         </div>
                     </div>
                 </header>

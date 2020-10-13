@@ -47,7 +47,7 @@ public class ReservationFlow {
     private Step activeStep = Step.Dates;
 
     public ReservationFlow() {
-        stepDescriptions.add(new StepDescription(0, "Dates", "Choose date, duration and people"));
+        stepDescriptions.add(new StepDescription(0, "Dates", "Choose date, duration and number of people"));
         stepDescriptions.add(new StepDescription(1, "Customer", "Provide customer details"));
         stepDescriptions.add(new StepDescription(2, "Review", "Verify your reservation"));
     }

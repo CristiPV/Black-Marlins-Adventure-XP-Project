@@ -10,22 +10,22 @@
 
 <body style="padding-top:100px" >
 
-<div class='signup-container'>
+<div class='form-container'>
     <div class='left-container'>
         <h1 th:text="${reservationFlow.reservation.activity.name}"></h1>
     </div>
-    <div class='right-container' style="background: #006F40">
+    <div class='right-container'>
         <header>
             <h1>Success!</h1>
             <div class='set'>
-                <div class='pets-breed'>
-                    <h2>You have now made a reservation.</h2>
+                <div class='amount-people'>
+                    <label>You have now made a reservation.</label>
                 </div>
             </div>
         </header>
         <footer>
             <div class='set'>
-                <a th:href="@{/activities/list}"><button type="submit" id="next">Back to List</button></a>
+                <a th:href="@{/activities/list}"><button type="submit" id="next">OK</button></a>
             </div>
         </footer>
     </div>

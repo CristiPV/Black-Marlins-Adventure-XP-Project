@@ -8,15 +8,17 @@ body {
     font-weight: 400;
     height: 100vh;
     justify-items: center;
-    /*weight: 100vw;*/
+    weight: 100vw;
 }
-.signup-container {
+.form-container {
     display: grid;
     grid-template-areas: "left right";
     max-width: 900px;
+    box-shadow: 5px 10px 18px #006F40;
 }
 .left-container {
-    background: #a5868b;
+    background: rgb(0,184,107);
+    opacity: 80%;
     overflow: hidden;
     padding: 40px 0 0 0;
     position: relative;
@@ -31,7 +33,7 @@ body {
 }
 .left-container h1 i {
     border-radius: 50%;
-    color: #198908;
+    color: #006F40;
     font-size: 24px;
     margin-right: 5px;
     padding: 10px;
@@ -43,7 +45,7 @@ body {
     text-align: center;
 }
 .left-container .puppy:before {
-    background: #807182;
+    background: rgb(0,184,107);
     content: "";
     height: 100%;
     left: 0;
@@ -62,7 +64,7 @@ body {
     width: 500px;
 }
 .right-container h1:nth-of-type(1) {
-    color: white;
+    color: #006F40;
     font-family: 'Share Tech Mono', monospace;
     font-size: 28px;
     font-weight: 600;
@@ -84,6 +86,9 @@ body {
 }
 .right-container header {
     padding: 40px;
+    border-style: solid;
+    border-color: rgb(0,184,107);
+    border-width: 1px;
 }
 .right-container label, .right-container input, .right-container .pets-photo {
     width: 178px;
@@ -115,9 +120,11 @@ body {
     background: #fff;
     display: grid;
     padding: 5px 40px;
+    border-left: 1px solid rgb(0,184,107);
+    border-right: 1px solid rgb(0,184,107);
 }
 .right-container footer button {
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgb(0,184,107);
     height: 38px;
     line-height: 38px;
     width: 100px;
@@ -129,23 +136,30 @@ body {
     transition: .2s all ease-in-out;
 }
 .right-container footer #back:hover {
-    background: #171A2B;
+    background: #006F40;
     color: white;
 }
 .right-container footer #next {
-    background: #807182;
+    background: rgb(0,184,107);
     border: 1px solid transparent;
     color: #fff;
 }
 .right-container footer #next:hover {
-    background: #171A2B;
+    background: #006F40;
 }
-.pets-name label, .pets-breed label, .pets-birthday label, .pets-gender label, .pets-spayed-neutered label, .pets-weight label {
-    color: white;
+.date label, .amount-people label, .duration label, .first-name label,
+.last-name label, .telephone label, .new-customer label,
+.what label, .when label, .duration-review label, .total-price label {
+    color: #006F40;
+    font-size: 16px;
     display: block;
     margin-bottom: 5px;
 }
 span {
-    color: white;
+    color: #006F40;
     font-family: 'Share Tech Mono', monospace;
+}
+h2 {
+    color: #006F40;
+    size: 16px;
 }

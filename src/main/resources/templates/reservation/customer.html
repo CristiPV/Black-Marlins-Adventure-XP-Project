@@ -10,32 +10,32 @@
 
 <body style="padding-top:100px">
   <form th:action="@{/reservation/customer}" method="post" th:object="${reservationFlow.reservation.customer}">
-    <div class='signup-container'>
+    <div class='form-container'>
       <div class='left-container'>
           <h1 th:text="${reservationFlow.reservation.activity.name}"></h1>
       </div>
-      <div class='right-container' style="background: #006F40">
+      <div class='right-container'>
         <header>
           <h1 th:text="${reservationFlow.getActiveStepDescription().getDescription()}"></h1>
           <div class='set'>
-            <div class='pets-breed'>
-              <label for='pets-breed'>First Name</label>
-              <input id='pets-breed' placeholder="First Name" th:value="*{firstName}" th:field="*{firstName}">
-            </div>
-            <div class='pets-birthday'>
-              <label for='pets-birthday'>Last Name</label>
-              <input id='pets-birthday' placeholder="Last Name" th:value="*{lastName}" th:field="*{lastName}">
-            </div>
+              <div class='first-name'>
+                <label for='first-name'>First Name</label>
+                <input id='first-name' placeholder="First Name" th:value="*{firstName}" th:field="*{firstName}">
+              </div>
+              <div class='last-name'>
+                <label for='last-name'>Last Name</label>
+                <input id='last-name' placeholder="Last Name" th:value="*{lastName}" th:field="*{lastName}">
+              </div>
           </div>
           <div class='set'>
-            <div class='pets-breed'>
-              <label for='pets-weight'>Telephone</label>
-              <input id='pets-weight' placeholder="Telephone" th:value="*{telephone}" th:field="*{telephone}">
-            </div>
-            <div class='pets-breed'>
-              <label for='pets-weight'>New customer</label>
-              <input type="checkbox" th:field="*{new}" style="width: 20px"/>
-            </div>
+              <div class='telephone'>
+                <label for='telephone'>Telephone</label>
+                <input id='telephone' placeholder="Telephone" th:value="*{telephone}" th:field="*{telephone}">
+              </div>
+              <div class='new-customer'>
+                <label for='new-customer'>New customer</label>
+                <input id="new-customer" type="checkbox"  th:field="*{new}" style="width: 20px"/>
+              </div>
           </div>
         </header>
         <footer>
