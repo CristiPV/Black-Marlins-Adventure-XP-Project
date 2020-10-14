@@ -38,6 +38,19 @@
             Read
         </a>
     </p>
+
+    <!-- Dropdown for filtering the reservations table on activity -->
+    <form th:action="@{/reservation/list}">
+        <select th:name="activityName">
+            <option th:value="all">All reservations</option>
+            <option th:each="activity : ${activities}"
+                    th:value="${activity.name}"
+                    th:text="${activity.name}"></option>
+        </select>
+        <button type="submit">Go</button>
+    </form>
+
+
     <table class="table table-bordered table-striped" style="margin-top: 10px">
         <thead class="thead-dark">
         <tr>

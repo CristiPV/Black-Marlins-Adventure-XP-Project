@@ -26,9 +26,18 @@ public class ReservationController {
     }
 
     @GetMapping("/reservation/list")
-    public String findAll(Model model) {
-        model.addAttribute("reservations", reservationService.findAllReservations());
+    public String findAll(Model model, @RequestParam(value="activityName", required = false) String activityName) {
+        model.addAttribute("activities", activityService.findAllActivities());
         model.addAttribute("isAdmin", LoginController.isAdmin());
+        if (activityName != null) {
+            if (activityName.equals("all")) {
+                model.addAttribute("reservations", reservationService.findAllReservations());
+            } else {
+                model.addAttribute("reservations", reservationService.findByActivityName(activityName));
+            }
+        } else {
+            model.addAttribute("reservations", reservationService.findAllReservations());
+        }
         return "reservation/reservationList";
     }
 
