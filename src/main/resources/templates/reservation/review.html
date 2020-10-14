@@ -8,48 +8,49 @@
     <title>Review</title>
 </head>
 
-<body style="padding-top:100px">
-<div class='form-container'>
-    <div class='left-container'>
-        <h1 th:text="${reservationFlow.reservation.activity.name}"></h1>
-    </div>
-    <div class='right-container'>
-        <header>
-            <h1 th:text="${reservationFlow.getActiveStepDescription().getDescription()}"></h1>
-            <div class='set'>
-                <div class="what">
-                    <label for="what" >What</label>
-                    <span id="what" th:text="${reservationFlow.reservation.activity.name}"></span>
-                </div>
+<body>
+        <div class='form-container'>
+            <div class='left-container'>
+                <h1 th:text="${reservationFlow.reservation.activity.name}"></h1>
             </div>
-            <div class='set'>
-                <div class="when">
-                    <label for="when">When</label>
-                    <span id="when" th:text="${#dates.format(reservationFlow.reservation.date, 'dd-MMM-yyyy HH:mm')}"></span>
-                </div>
+            <div class='right-container'>
+                <header>
+                    <h1 th:text="${reservationFlow.getActiveStepDescription().getDescription()}"></h1>
+                    <div class='set'>
+                        <div class="what">
+                            <label for="what" >What</label>
+                            <span id="what" th:text="${reservationFlow.reservation.activity.name}"></span>
+                        </div>
+                    </div>
+                    <div class='set'>
+                        <div class="when">
+                            <label for="when">When</label>
+                            <span id="when" th:text="${#dates.format(reservationFlow.reservation.date, 'dd-MMM-yyyy HH:mm')}"></span>
+                        </div>
+                    </div>
+                    <div class='set'>
+                        <div class="duration-review">
+                            <label for="duration-review">Duration</label>
+                            <span id="duration-review" th:text="${reservationFlow.reservation.hours}"></span>
+                        </div>
+                    </div>
+                    <div class='set'>
+                        <div class="total-price">
+                            <label for="total-price">Total price</label>
+                            <span id="total-price" th:text="${#numbers.formatDecimal(reservationFlow.reservation.calculateTotalPrice(), 0, 'COMMA', 2, 'POINT')}"></span>
+                        </div>
+                    </div>
+                </header>
+                <footer>
+                    <form id="form" th:action="@{/reservation/review}" method="post">
+                        <div class='set'>
+                            <button id='back' type="submit" name="back">Back</button>
+                            <button id='next' type="submit" name="confirm">Confirm</button>
+                        </div>
+                    </form>
+                </footer>
             </div>
-            <div class='set'>
-                <div class="duration-review">
-                    <label for="duration-review">Duration</label>
-                    <span id="duration-review" th:text="${reservationFlow.reservation.hours}"></span>
-                </div>
-            </div>
-            <div class='set'>
-                <div class="total-price">
-                    <label for="total-price">Total price</label>
-                    <span id="total-price" th:text="${reservationFlow.reservation.calculateTotalPrice()}"></span>
-                </div>
-            </div>
-        </header>
-        <footer>
-            <form id="form" th:action="@{/reservation/review}" method="post">
-                <div class='set'>
-                    <button id='back' type="submit" name="back">Back</button>
-                    <button id='next' type="submit" name="confirm">Confirm</button>
-                </div>
-            </form>
-        </footer>
-    </div>
-</div>
+        </div>
+
 </body>
 </html>

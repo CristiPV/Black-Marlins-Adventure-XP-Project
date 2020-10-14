@@ -45,18 +45,18 @@
             <th>Date & Time</th>
             <th>Amount of people</th>
             <th>Customer</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="reservation : ${reservations}">
             <td th:text="${reservation.activity.name}" />
-            <td th:text="${reservation.date}" />
+            <td th:text="${#dates.format(reservation.date, 'dd-MMM-yyyy HH:mm')}" />
             <td th:text="${reservation.amountOfPeople}" />
             <td th:text="${reservation.customer.firstName} + ' ' + ${reservation.customer.lastName}" />
             <td>
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body">
-
                         <div class="column">
                             <h2>Customer Information</h2>
                             <p th:text="${reservation.customer.telephone}"></p>

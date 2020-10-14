@@ -1,7 +1,6 @@
 body {
     align-items: flex-start;
     padding-top: 100px;
-    color: white;
     display: grid;
     font-family: 'Share Tech Mono', monospace;
     font-size: 14px;
@@ -9,6 +8,7 @@ body {
     height: 100vh;
     justify-items: center;
     weight: 100vw;
+    padding-top:100px;
 }
 .form-container {
     display: grid;

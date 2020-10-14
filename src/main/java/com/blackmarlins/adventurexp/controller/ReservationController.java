@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDateTime;
 
 @Controller
 @SessionAttributes("reservationFlow")
@@ -48,11 +47,11 @@ public class ReservationController {
 
 
 
-    // Flow step 1 - add date and duration (in hours)
+    // Flow step 1 - add date, duration (in hours), and number of people
 
     @GetMapping("/reservation")
     public String getDateForm(@RequestParam(value = "activityId") Long activityId,
-                              @ModelAttribute("reservationFlow") ReservationFlow reservationFlow, Model model) {
+                              @ModelAttribute("reservationFlow") ReservationFlow reservationFlow) {
         reservationFlow.enterStep(ReservationFlow.Step.Dates);
         Activity activity = activityService.findActivityById(activityId);
         reservationFlow.getReservation().setActivity(activity);
@@ -63,8 +62,6 @@ public class ReservationController {
     public String dates(@ModelAttribute("reservationFlow") ReservationFlow reservationFlow, RedirectAttributes redirectAttributes) {
         reservationFlow.enterStep(ReservationFlow.Step.Dates);
         reservationFlow.completeStep(ReservationFlow.Step.Dates);
-        // set value for date2
-        /*reservationFlow.getReservation().setDate2();*/
         redirectAttributes.addFlashAttribute("reservationFlow", reservationFlow);
         return "redirect:/reservation/customer";
     }
@@ -77,7 +74,7 @@ public class ReservationController {
 
 
 
-    // Flow step 1 - add customer
+    // Flow step 2 - add customer
 
     @GetMapping("/reservation/customer")
     public String getCustomerForm(@ModelAttribute("reservationFlow") ReservationFlow reservationFlow) {
@@ -94,9 +91,8 @@ public class ReservationController {
     }
 
     @PostMapping(value = "/reservation/customer")
-    public String postAddGuest(@ModelAttribute("reservationFlow") ReservationFlow reservationFlow) {
+    public String postAddCustomer(@ModelAttribute("reservationFlow") ReservationFlow reservationFlow) {
         reservationFlow.enterStep(ReservationFlow.Step.Customer);
-        //System.out.println(reservationFlow.getReservation());
         return "redirect:/reservation/review";
     }
 
@@ -138,6 +134,8 @@ public class ReservationController {
 
     @GetMapping("/reservation/completed")
     public String getFlowCompleted(@ModelAttribute("reservationFlow") ReservationFlow reservationFlow, SessionStatus sessionStatus) {
+        // setComplete() method only removes attributes set by the @SessionAttributes annotation
+        // it removes the attributes after the page rendering
         sessionStatus.setComplete();
         return "reservation/completed";
     }
