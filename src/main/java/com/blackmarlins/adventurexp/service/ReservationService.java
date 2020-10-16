@@ -23,7 +23,7 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
-    public Reservation findActivityById(Long reservationId) {
+    public Reservation findReservationById(Long reservationId) {
         Optional<Reservation> result = reservationRepository.findById(reservationId);
         Reservation reservation = null;
         if (result.isPresent()) {
@@ -31,7 +31,6 @@ public class ReservationService {
         }
         return reservation;
     }
-
 
     public double calculatePrice (Reservation reservation) {
          return reservation.getActivity().getHourlyPrice() *

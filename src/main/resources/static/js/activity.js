@@ -28,9 +28,7 @@ $('document').ready(function() {
             });
 
             $('#infoModal').modal();
-        });
-
-
+    });
 
     $('table #deleteButton').on('click',function(event) {
         event.preventDefault();
@@ -38,4 +36,5 @@ $('document').ready(function() {
         $('#confirmDeleteButton').attr('href', href);
         $('#deleteModal').modal();
     });
+
 });

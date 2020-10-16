@@ -4,10 +4,6 @@
 <head>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">-->
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -17,9 +13,16 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <link href='https://fonts.googleapis.com/css?family=Share Tech Mono' rel='stylesheet'>
+
+    <!-- JS file that handles the pop-up forms -->
+    <script src="/js/reservation.js"></script>
+
     <!-- Link to custom CSS -->
-    <link rel="stylesheet" href="/css/productNavbar.css">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/productNavbar.css">
+    <link rel="stylesheet" href="/css/popup.css">
+
 
     <title>Reservations</title>
 </head>
@@ -33,11 +36,6 @@
 <div class="container">
     <h3 id="header">Reservations</h3>
 
-    <p>
-        <a class="btn btn-primary" id="readButton" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Read
-        </a>
-    </p>
     <table class="table table-bordered table-striped" style="margin-top: 10px">
         <thead class="thead-dark">
         <tr>
@@ -45,6 +43,7 @@
             <th>Date & Time</th>
             <th>Amount of people</th>
             <th>Customer</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -54,10 +53,18 @@
             <td th:text="${reservation.amountOfPeople}" />
             <td th:text="${reservation.customer.firstName} + ' ' + ${reservation.customer.lastName}" />
             <td>
-                <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-
-                        <div class="column">
+                <a class="btn btn-primary btn-sm" id="loginButton" data-toggle="modal" data-target="#infoModal">Login</a>
+                <a th:href="@{/reservation/cancel/(id=${reservation.id})}" class="btn btn-danger btn-sm btn-group-edit" id="deleteButton" style="width: 150px;">Delete</a><br>
+            </td>
+            <!-- info modal -->
+            <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a type="button" class="close" id="loginModalCloseBtn" data-dismiss="modal">&times;</a>
+                            <h1 class="modal-title">Log in</h1>
+                        </div>
+                        <div>
                             <h2>Customer Information</h2>
                             <p th:text="${reservation.customer.telephone}"></p>
                             <h2>Price</h2>
@@ -67,10 +74,7 @@
                         </div>
                     </div>
                 </div>
-            </td>
-            <td>
-                <a th:href="@{/reservation/cancel/(id=${reservation.id})}" class="btn btn-danger btn-sm btn-group-edit" id="deleteButton" style="width: 150px;">Delete</a>
-            </td>
+            </div>
         </tr>
         </tbody>
     </table>
@@ -96,10 +100,6 @@
         </div>
     </div>
 </div>
-
-<!-- JS file that handles the pop-up forms -->
-<script src="/js/reservation.js"></script>
-
 
 </body>
 </html>

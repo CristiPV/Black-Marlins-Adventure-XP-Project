@@ -1,10 +1,12 @@
 package com.blackmarlins.adventurexp.controller;
 
 import com.blackmarlins.adventurexp.model.Activity;
+import com.blackmarlins.adventurexp.model.reservation.Reservation;
 import com.blackmarlins.adventurexp.model.reservation.ReservationFlow;
 import com.blackmarlins.adventurexp.service.ActivityService;
 import com.blackmarlins.adventurexp.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -148,5 +150,17 @@ public class ReservationController {
     public String cancel(Long id){
         reservationService.cancel(id);
         return "redirect:/reservation/list";
+    }
+
+    // Find one by id
+    @RequestMapping("reservation/findReservationById")
+    @ResponseBody
+    public Reservation findReservationById(Long id, SessionStatus status)
+    {
+        status.setComplete();
+        Reservation reservation = reservationService.findReservationById(id);
+        reservation.getActivity().getReservations().clear();
+        System.out.println(reservation);
+        return reservation;
     }
 }
