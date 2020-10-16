@@ -25,72 +25,72 @@
 </head>
 
 <body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<section th:replace="activity/activity :: #navigationContainer"></section>
-<div class="container">
-    <h3 id="header">Reservations</h3>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <section th:replace="activity/activity :: #navigationContainer"></section>
+    <div class="container">
+        <h3 id="header">Reservations</h3>
+            <p>
+                <a class="btn btn-primary" id="readButton" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Read
+                </a>
+            </p>
 
-    <p>
-        <a class="btn btn-primary" id="readButton" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Read
-        </a>
-    </p>
+            <!-- Dropdown for filtering the reservations table based on activity -->
+            <form th:action="@{/reservation/list}">
+                <select class="mdb-select md-form md-outline colorful-select dropdown-primary" th:name="activityName" >
+                    <option value="" disabled selected>Choose your option</option>
+                    <option th:value="all">All reservations</option>
+                    <option th:each="activity : ${activities}"
+                            th:value="${activity.name}"
+                            th:text="${activity.name}"></option>
+                </select>
+                <button type="submit">Go</button>
+            </form>
 
-    <!-- Dropdown for filtering the reservations table on activity -->
-    <form th:action="@{/reservation/list}">
-        <select th:name="activityName">
-            <option th:value="all">All reservations</option>
-            <option th:each="activity : ${activities}"
-                    th:value="${activity.name}"
-                    th:text="${activity.name}"></option>
-        </select>
-        <button type="submit">Go</button>
-    </form>
-
-
-    <table class="table table-bordered table-striped" style="margin-top: 10px">
-        <thead class="thead-dark">
-        <tr>
-            <th>Activity</th>
-            <th>Date & Time</th>
-            <th>Amount of people</th>
-            <th>Customer</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="reservation : ${reservations}">
-            <td th:text="${reservation.activity.name}" />
-            <td th:text="${#dates.format(reservation.date, 'dd-MMM-yyyy HH:mm')}" />
-            <td th:text="${reservation.amountOfPeople}" />
-            <td th:text="${reservation.customer.firstName} + ' ' + ${reservation.customer.lastName}" />
-            <td>
-                <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                        <div class="column">
-                            <h2>Customer Information</h2>
-                            <p th:text="${reservation.customer.telephone}"></p>
-                            <h2>Price</h2>
-                            <p th:text="${reservation.price}"></p>
-                            <h2>Activity Description</h2>
-                            <p th:text="${reservation.activity.description}"></p>
+            <table class="table table-bordered table-striped" style="margin-top: 10px">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Activity</th>
+                    <th>Date & Time</th>
+                    <th>Amount of people</th>
+                    <th>Customer</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reservation : ${reservations}">
+                    <td th:text="${reservation.activity.name}" />
+                    <td th:text="${#dates.format(reservation.date, 'dd-MMM-yyyy HH:mm')}" />
+                    <td th:text="${reservation.amountOfPeople}" />
+                    <td th:text="${reservation.customer.firstName} + ' ' + ${reservation.customer.lastName}" />
+                    <td>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <div class="column">
+                                    <h2>Customer Information</h2>
+                                    <p th:text="${reservation.customer.telephone}"></p>
+                                    <h2>Price</h2>
+                                    <p th:text="${reservation.price}"></p>
+                                    <h2>Activity Description</h2>
+                                    <p th:text="${reservation.activity.description}"></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <a th:href="@{/reservation/cancel/(id=${reservation.id})}" class="btn btn-danger btn-sm btn-group-edit" id="deleteButton" style="width: 150px;">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+                    </td>
+                    <td>
+                        <!-- Delete -->
+                        <a th:href="@{/reservation/delete/(id=${reservation.id})}" class="btn btn-danger btn-sm btn-group-edit" id="deleteButton" style="width: 150px;">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
 
-<!-- Delete Modal -->
-<div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+    <!-- Delete Modal -->
+    <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -110,9 +110,8 @@
     </div>
 </div>
 
-<!-- JS file that handles the pop-up forms -->
-<script src="/js/reservation.js"></script>
-
+    <!-- JS file that handles the pop-up forms -->
+    <script src="/js/reservation.js"></script>
 
 </body>
 </html>

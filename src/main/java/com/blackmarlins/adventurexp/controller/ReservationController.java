@@ -1,6 +1,7 @@
 package com.blackmarlins.adventurexp.controller;
 
 import com.blackmarlins.adventurexp.model.Activity;
+import com.blackmarlins.adventurexp.model.reservation.Reservation;
 import com.blackmarlins.adventurexp.model.reservation.ReservationFlow;
 import com.blackmarlins.adventurexp.service.ActivityService;
 import com.blackmarlins.adventurexp.service.ReservationService;
@@ -31,13 +32,14 @@ public class ReservationController {
         model.addAttribute("isAdmin", LoginController.isAdmin());
         if (activityName != null) {
             if (activityName.equals("all")) {
-                model.addAttribute("reservations", reservationService.findAllReservations());
+                model.addAttribute("reservations", reservationService.findAllActiveReservations());
             } else {
                 model.addAttribute("reservations", reservationService.findByActivityName(activityName));
             }
         } else {
-            model.addAttribute("reservations", reservationService.findAllReservations());
+            model.addAttribute("reservations", reservationService.findAllActiveReservations());
         }
+        System.out.println(activityName);
         return "reservation/reservationList";
     }
 
@@ -151,8 +153,8 @@ public class ReservationController {
 
     //DElETE
 
-    @RequestMapping(value="/reservation/cancel", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String cancel(Long id){
+    @RequestMapping(value="/reservation/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String delete(Long id){
         reservationService.cancel(id);
         return "redirect:/reservation/list";
     }

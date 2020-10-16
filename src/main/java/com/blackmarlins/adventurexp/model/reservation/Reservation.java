@@ -27,29 +27,35 @@ public class Reservation {
     private Date date =  new Date(System.currentTimeMillis());
     @Column(nullable = false)
     private int hours = 1;
-    /*@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime date2;*/
     @Column(nullable = false)
     private int amountOfPeople = 1;
     @Column
     private double price;
+    @Column
+    private Boolean isCancelled;
 
     public Reservation() {
         this.id = Long.valueOf(0);
     }
 
-    public Reservation(Activity activity, Customer customer, Date date, int hours, int amountOfPeople) {
+    public Reservation(Long id, Activity activity, Customer customer, Date date, int hours, int amountOfPeople, double price, Boolean isCancelled) {
+        this.id = id;
         this.activity = activity;
         this.customer = customer;
         this.date = date;
         this.hours = hours;
         this.amountOfPeople = amountOfPeople;
+        this.price = price;
+        this.isCancelled = isCancelled;
     }
 
+    public Boolean getCancelled() {
+        return isCancelled;
+    }
 
-    /*public static double getTaxPercentage() {
-        return TAX_PERCENTAGE;
-    }*/
+    public void setCancelled(Boolean cancelled) {
+        isCancelled = cancelled;
+    }
 
     public Long getId() {
         return id;
@@ -95,18 +101,6 @@ public class Reservation {
     public void setHours(int hours) {
         this.hours = hours;
     }
-
-/*
-    public LocalDateTime getDate2() {
-        return date2;
-    }
-*/
-
-/*
-    public void setDate2() {
-        this.date2 = this.date.plusHours(this.hours);
-    }
-*/
 
     public int getAmountOfPeople() {
         return amountOfPeople;

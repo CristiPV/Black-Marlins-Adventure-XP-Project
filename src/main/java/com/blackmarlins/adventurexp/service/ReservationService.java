@@ -49,8 +49,10 @@ public class ReservationService {
     }
 
     public List<Reservation> findByActivityName(String name) {
-        return reservationRepository.findByActivity_Name(name);
+        return reservationRepository.findActiveReservationsByActivity_Name(name);
     }
 
-
+    public List<Reservation> findAllActiveReservations() {
+        return reservationRepository.findAllActiveReservations();
+    }
 }

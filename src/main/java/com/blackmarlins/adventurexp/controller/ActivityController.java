@@ -19,7 +19,6 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
-
     // Get All Activities
     @GetMapping("/list")
     public String findAll(Model model){
