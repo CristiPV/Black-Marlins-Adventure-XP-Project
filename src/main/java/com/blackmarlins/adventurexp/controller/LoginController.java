@@ -55,6 +55,15 @@ public class LoginController {
         }
     }
 
+    @GetMapping("/logout")
+    public String logout(Model model) {
+        isAdmin = false;
+        isLoggedIn = false;
+        model.addAttribute("isAdmin", isAdmin);
+        return "redirect:/login";
+
+    }
+
     public static boolean isAdmin() {
         return isAdmin;
     }

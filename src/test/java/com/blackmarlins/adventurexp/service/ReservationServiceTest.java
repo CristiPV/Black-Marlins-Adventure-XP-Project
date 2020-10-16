@@ -41,4 +41,12 @@ class ReservationServiceTest {
     {
         assertThat(reservationService.calculatePrice(reservation) == result).isEqualTo(expectedMatch);
     }
+
+    @Test
+    @DisplayName("Can retrieve all ids from database")
+    void findById()
+    {
+        long testId = 0;
+        assertNotNull(reservationService.findReservationById(testId));
+    }
 }

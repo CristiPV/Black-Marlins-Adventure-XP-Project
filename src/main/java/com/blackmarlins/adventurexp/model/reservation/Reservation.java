@@ -33,6 +33,8 @@ public class Reservation {
     private int amountOfPeople = 1;
     @Column
     private double price;
+    @Column
+    private double fee;
 
     public Reservation() {
         this.id = Long.valueOf(0);
@@ -122,6 +124,14 @@ public class Reservation {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public double getFee() {
+        return fee;
+    }
+
+    public void setFee(double fee) {
+        this.fee = fee;
     }
 
     /*

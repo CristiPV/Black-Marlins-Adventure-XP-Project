@@ -1,6 +1,7 @@
 package com.blackmarlins.adventurexp.controller;
 
 import com.blackmarlins.adventurexp.model.Activity;
+import com.blackmarlins.adventurexp.model.reservation.Reservation;
 import com.blackmarlins.adventurexp.model.reservation.ReservationFlow;
 import com.blackmarlins.adventurexp.service.ActivityService;
 import com.blackmarlins.adventurexp.service.ReservationService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Controller
 @SessionAttributes("reservationFlow")
@@ -127,6 +129,7 @@ public class ReservationController {
                              RedirectAttributes ra) {
         reservationFlow.setActive(ReservationFlow.Step.Review);
         ra.addFlashAttribute("reservationFlow", reservationFlow);
+        reservationFlow.getReservation().setFee(reservationFlow.getReservation().getPrice() / 4.0);
         reservationService.save(reservationFlow.getReservation());
         reservationFlow.completeStep(ReservationFlow.Step.Review);
         return "redirect:/reservation/completed";
@@ -142,11 +145,24 @@ public class ReservationController {
         return "reservation/completed";
     }
 
-    //DElETE
+    //Cancel without fee
 
     @RequestMapping(value="/reservation/cancel", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String cancel(Long id){
         reservationService.cancel(id);
         return "redirect:/reservation/list";
     }
+
+    // Find one by id
+    @RequestMapping("/reservation/findById")
+    @ResponseBody
+    public Reservation findById(Long id)
+    {
+        Reservation reservation = reservationService.findReservationById(id);
+        /* clears the list of the reservations attribute in order to
+        avoid stack overflow error, as it was entering into a recursive circle
+        from reservations to activity... */
+        return reservation;
+    }
+
 }

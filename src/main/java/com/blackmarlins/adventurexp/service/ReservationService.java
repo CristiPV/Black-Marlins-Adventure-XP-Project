@@ -47,5 +47,12 @@ public class ReservationService {
 
     }
 
-
+    public Reservation findReservationById(Long reservationId) {
+        Optional<Reservation> result = reservationRepository.findById(reservationId);
+        Reservation reservation = null;
+        if (result.isPresent()) {
+            reservation = result.get();
+        }
+        return reservation;
+    }
 }

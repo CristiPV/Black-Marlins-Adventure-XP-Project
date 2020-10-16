@@ -32,8 +32,8 @@
     <section id="navigationContainer">
         <nav id="navBar">
             <div id="navBar-left">
-                <a href="/login" class="navChild">
-                    <span>Login</span>
+                <a th:href="@{/logout}" th:method="GET" class="navChild">
+                    <span>Log out</span>
                     <hr class="hoverLine">
                 </a>
             </div>
@@ -59,12 +59,10 @@
         <!-- Page Header -->
         <h3 id="header">Activities</h3>
 
-        <div id="add-read-buttons" align="left">
+        <div id="add-buttons" align="left">
             <!-- Add new activity button-->
 
             <input type="button" id="addButton" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#addModal" value="Add activity"> 
-            <!-- Expand description button-->
-            <input type="button" id="readButton" class="btn btn-primary btn-sm mb-3" value="Read" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="background: #006F40">
 
         </div>
 
