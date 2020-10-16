@@ -22,6 +22,7 @@ public class Activity {
     private String description;
     private Double hourlyPrice;
     private int ageLimit;
+    private boolean isPaused;
 
     public Activity() {
         this.id = Long.valueOf(0);
@@ -41,6 +42,7 @@ public class Activity {
         this.description = description;
         this.hourlyPrice = price;
         this.ageLimit = ageLimit;
+        this.isPaused = false;
     }
 
     public Long getId() {
@@ -83,14 +85,24 @@ public class Activity {
         this.ageLimit = ageLimit;
     }
 
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
+    }
+
     @Override
     public String toString() {
         return "Activity{" +
                 "id=" + id +
+                ", reservations=" + reservations +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", hourlyPrice=" + hourlyPrice +
                 ", ageLimit=" + ageLimit +
+                ", isPaused=" + isPaused +
                 '}';
     }
 }

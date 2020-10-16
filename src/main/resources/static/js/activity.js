@@ -38,4 +38,19 @@ $('document').ready(function() {
         $('#confirmDeleteButton').attr('href', href);
         $('#deleteModal').modal();
     });
+
+    $('table #pauseButton').on('click',function(event) {
+        event.preventDefault();
+        var href = $(this).attr('href');
+        $('#confirmPauseButton').attr('href', href);
+        $('#pauseModal').modal();
+    });
+
+    $('table #unpauseButton').on('click',function(event) {
+        event.preventDefault();
+        var href = $(this).attr('href');
+        $('#confirmUnpauseButton').attr('href', href);
+        $('#unpauseModal').modal();
+    });
+
 });
