@@ -62,4 +62,18 @@ public class ActivityController {
         return "redirect:/activities/list";
     }
 
+    // Pause
+    @GetMapping("/pause")
+    public String pause(Long id) {
+        Activity activity = activityService.findActivityById(id);
+        if(activity.isPaused()){
+            activity.setPaused(false);
+        }else if (activity.isPaused() == false) {
+            activity.setPaused(true);
+        }
+        activityService.saveActivity(activity);
+        return "redirect:/activities/list";
+    }
+
+
 }

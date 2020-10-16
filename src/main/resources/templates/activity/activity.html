@@ -93,9 +93,13 @@
                         <!-- Update activity -->
                         <a th:href="@{/activities/findById/(id=${activity.id})}" class="btn btn-primary btn-sm" id="editButton">Update</a><br>
                         <!-- Make reservation associated with the given activity -->
-                        <a th:href="@{/reservation(activityId=${activity.id})}" class="btn btn-info btn-sm" id="reservationButton">Make reservation</a><br>
+                        <a th:if="${activity.isPaused() == false}" th:href="@{/reservation(activityId=${activity.id})}" class="btn btn-info btn-sm" id="reservationButton">Make reservation</a><br>
+                        <!-- CREATE BTN FOR RESERVATION LIST -->
+                        <a th:href="@{/activities/reservations/(id=${activity.id})}" class="btn btn-info btn-sm" id="reservationListButton">Reservation list</a><br>
+                       <!--Pause button for activity -->
+                        <a th:if="${activity.isPaused() == false}" th:href="@{/activities/pause/(id=${activity.id})}" class="btn btn-danger btn-sm" id="pauseButton">Make unavailable</a>
+                        <a th:if="${activity.isPaused() == true}" th:href="@{/activities/pause/(id=${activity.id})}" class="btn btn-danger btn-sm" id="unpauseButton">Make available</a>
                         <!-- Delete activity -->
-
                         <a th:if="${isAdmin == true}" th:href="@{/activities/delete/(id=${activity.id})}" class="btn btn-danger btn-sm" id="deleteButton">Delete</a>
                     </div>
                 </td>
@@ -251,6 +255,48 @@
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-primary" id="confirmDeleteButton" href="">Yes, delete</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Modal  -->
+    <div class="modal" id="pauseModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="font-size: x-large">Confirm Pause</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to pause this activity?</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" id="confirmPauseButton" href="">Yes, pause</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UnPause Modal  -->
+    <div class="modal" id="unpauseModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="font-size: x-large">Confirm Unpause</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to Unpause this activity?</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" id="confirmUnpauseButton" href=""> Yes, Unpause</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
