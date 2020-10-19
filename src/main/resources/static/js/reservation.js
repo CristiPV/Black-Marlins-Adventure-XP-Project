@@ -18,4 +18,20 @@ $('document').ready(function() {
         $('#infoModal').modal();
     });
 
+
+    $('table #cancelButton').on('click', function(event) {
+        event.preventDefault();
+
+        var href = $(this).attr('href');
+
+        $.get(href, function(reservation, status) {
+            $('#Cid').val(reservation.id);
+            $('#fee').val(reservation.fee);
+            $('#c').val(reservation.isCancelled);
+        });
+
+        $('#cancelModal').modal();
+    });
+
 });
+

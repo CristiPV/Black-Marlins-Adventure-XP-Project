@@ -33,12 +33,14 @@ public class Reservation {
     private double price;
     @Column
     private Boolean isCancelled;
+    @Column
+    private Double fee;
 
     public Reservation() {
         this.id = Long.valueOf(0);
     }
 
-    public Reservation(Long id, Activity activity, Customer customer, Date date, int hours, int amountOfPeople, double price, Boolean isCancelled) {
+    public Reservation(Long id, Activity activity, Customer customer, Date date, int hours, int amountOfPeople, double price, Boolean isCancelled, Double fee) {
         this.id = id;
         this.activity = activity;
         this.customer = customer;
@@ -46,7 +48,8 @@ public class Reservation {
         this.hours = hours;
         this.amountOfPeople = amountOfPeople;
         this.price = price;
-        this.isCancelled = isCancelled;
+        this.isCancelled = false;
+        this.fee = fee;
     }
 
     public Boolean getCancelled() {
@@ -114,24 +117,42 @@ public class Reservation {
         return price;
     }
 
+    public Double getFee() {
+        return fee;
+    }
+
+    public void setFee() {
+        this.fee = calculateFee();
+    }
+
+    private Double calculateFee() {
+        return price * 0.1;
+    }
+
     /*
         This setter calculates and sets the total price for a new Reservation.
         If the activity price updated, then the reservation price remains unchanged.
     */
     public void setPrice(double price) {
-        this.price = hours * this.getActivity().getHourlyPrice() * amountOfPeople;
+        this.price = calculatePrice();
+    }
+
+    private double calculatePrice() {
+        return hours * this.getActivity().getHourlyPrice() * amountOfPeople;
     }
 
     @Override
     public String toString() {
         return "Reservation{" +
                 "id=" + id +
-                ", activity_name=" + getActivity().getName() +
+                ", activity=" + activity +
                 ", customer=" + customer +
                 ", date=" + date +
                 ", hours=" + hours +
                 ", amountOfPeople=" + amountOfPeople +
                 ", price=" + price +
+                ", isCancelled=" + isCancelled +
+                ", fee=" + fee +
                 '}';
     }
 }

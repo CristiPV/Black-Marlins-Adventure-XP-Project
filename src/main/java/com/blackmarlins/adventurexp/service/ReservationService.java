@@ -1,15 +1,11 @@
 package com.blackmarlins.adventurexp.service;
 
-import com.blackmarlins.adventurexp.model.Activity;
 import com.blackmarlins.adventurexp.model.reservation.Reservation;
 import com.blackmarlins.adventurexp.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class ReservationService {
@@ -64,3 +60,4 @@ public class ReservationService {
         return reservation;
     }
 }
+

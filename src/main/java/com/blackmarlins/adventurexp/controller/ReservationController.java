@@ -11,7 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Controller
 @SessionAttributes("reservationFlow")
@@ -134,6 +135,7 @@ public class ReservationController {
                              RedirectAttributes ra) {
         reservationFlow.setActive(ReservationFlow.Step.Review);
         ra.addFlashAttribute("reservationFlow", reservationFlow);
+        reservationFlow.getReservation().setFee();
         reservationService.save(reservationFlow.getReservation());
         reservationFlow.completeStep(ReservationFlow.Step.Review);
         return "redirect:/reservation/completed";
@@ -151,21 +153,27 @@ public class ReservationController {
         return "reservation/completed";
     }
 
-/*  // Delete
-    @RequestMapping(value="/reservation/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String delete(Long id){
-        reservationService.delete(id);
+
+    // Cancel
+    @RequestMapping(value="/reservation/cancel", method = {RequestMethod.PUT, RequestMethod.GET})
+    public String cancel(Reservation reservation) {
+        Long id = reservation.getId();
+        Reservation reservation1 = reservationService.findById(id);
+        /* clears the list of the reservations attribute in order to
+        avoid stack overflow error, as it was entering into a recursive circle
+        from reservations to activity... */
+        reservation1.getActivity().getReservations().clear();
+        reservation1.setCancelled(true);
+        reservationService.save(reservation1);
         return "redirect:/reservation/list";
-    }*/
+    }
+
 
     // Find one by id
     @RequestMapping("/reservation/findById")
     @ResponseBody
     public Reservation findById(Long id) {
         Reservation reservation = reservationService.findById(id);
-        /* clears the list of the reservations attribute in order to
-        avoid stack overflow error, as it was entering into a recursive circle
-        from reservations to activity... */
         reservation.getActivity().getReservations().clear();
         return reservation;
     }
