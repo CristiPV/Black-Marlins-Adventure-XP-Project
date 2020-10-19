@@ -48,7 +48,7 @@ public class Reservation {
         this.hours = hours;
         this.amountOfPeople = amountOfPeople;
         this.price = price;
-        this.isCancelled = false;
+        this.isCancelled = isCancelled;
         this.fee = fee;
     }
 

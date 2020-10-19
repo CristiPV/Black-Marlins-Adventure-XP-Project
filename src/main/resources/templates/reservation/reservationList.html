@@ -49,6 +49,7 @@
                 <th>Amount of people</th>
                 <th>Customer</th>
                 <th>Price</th>
+                <th>Is cancelled</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -59,6 +60,7 @@
                     <td th:text="${reservation.amountOfPeople}" />
                     <td th:text="${reservation.customer.firstName} + ' ' + ${reservation.customer.lastName}" />
                     <td th:text="${#numbers.formatDecimal(reservation.price, 0, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${reservation.cancelled}"></td>
                     <td th:disabled="${reservation.cancelled}">
                         <!-- Read reservation info -->
                         <a th:href="@{/reservation/findById/(id=${reservation.id})}" class="btn btn-primary btn-sm" id="readInfoButton" style="width: 150px;">Info</a><br>
@@ -121,7 +123,7 @@
                         <div class="form-group">
                             <input type="hidden" id="Cid" name="id">
                             <label for="fee" class="col-form-label">The cancellation fee is 10% of the total price</label>
-                            <input type="text" class="form-control" id="fee" th:field="*{fee}">
+                            <input type="text" class="form-control" id="fee" th:field="*{fee}" readonly>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-secondary">Yes</button>
