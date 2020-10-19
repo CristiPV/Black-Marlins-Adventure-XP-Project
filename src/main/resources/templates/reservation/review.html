@@ -37,7 +37,7 @@
                     <div class='set'>
                         <div class="total-price">
                             <label for="total-price">Total price</label>
-                            <span id="total-price" th:text="${#numbers.formatDecimal(reservationFlow.reservation.calculateTotalPrice(), 0, 'COMMA', 2, 'POINT')}"></span>
+                            <span id="total-price" th:text="${#numbers.formatDecimal(reservationFlow.reservation.price, 0, 'COMMA', 2, 'POINT')}"></span>
                         </div>
                     </div>
                 </header>

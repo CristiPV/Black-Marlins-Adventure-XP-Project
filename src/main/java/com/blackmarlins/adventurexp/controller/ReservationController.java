@@ -39,9 +39,9 @@ public class ReservationController {
         } else {
             model.addAttribute("reservations", reservationService.findAllActiveReservations());
         }
-        System.out.println(activityName);
         return "reservation/reservationList";
     }
+
 
     /**
      * Since {@code reservationFlow} is used in the {@code SessionAttributes} on the controller level, it informs
@@ -151,11 +151,22 @@ public class ReservationController {
         return "reservation/completed";
     }
 
-    //DElETE
-
+/*  // Delete
     @RequestMapping(value="/reservation/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String delete(Long id){
-        reservationService.cancel(id);
+        reservationService.delete(id);
         return "redirect:/reservation/list";
+    }*/
+
+    // Find one by id
+    @RequestMapping("/reservation/findById")
+    @ResponseBody
+    public Reservation findById(Long id) {
+        Reservation reservation = reservationService.findById(id);
+        /* clears the list of the reservations attribute in order to
+        avoid stack overflow error, as it was entering into a recursive circle
+        from reservations to activity... */
+        reservation.getActivity().getReservations().clear();
+        return reservation;
     }
 }

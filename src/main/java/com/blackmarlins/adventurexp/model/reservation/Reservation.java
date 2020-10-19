@@ -114,21 +114,19 @@ public class Reservation {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     /*
-    *   Calculates the total price for this reservation
+        This setter calculates and sets the total price for a new Reservation.
+        If the activity price updated, then the reservation price remains unchanged.
     */
-    public double calculateTotalPrice() {
-        return this.getActivity().getHourlyPrice() * this.getHours();
+    public void setPrice(double price) {
+        this.price = hours * this.getActivity().getHourlyPrice() * amountOfPeople;
     }
 
     @Override
     public String toString() {
         return "Reservation{" +
                 "id=" + id +
+                ", activity_name=" + getActivity().getName() +
                 ", customer=" + customer +
                 ", date=" + date +
                 ", hours=" + hours +

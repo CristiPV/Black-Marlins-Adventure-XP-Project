@@ -8,12 +8,12 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Customer {
 
-    @Column(nullable = false)
+    @Column/*(nullable = false)*/
     private String firstName;
 
-    @Column(nullable = false) // it accepts null values
+    @Column/*(nullable = false)*/ // it should NOT accept null values
     private String lastName;
-    @Column(nullable = false)
+    @Column/*(nullable = false)*/
     private String telephone;
 
     public Boolean getNew() {

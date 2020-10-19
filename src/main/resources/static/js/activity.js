@@ -28,7 +28,7 @@ $('document').ready(function() {
             });
 
             $('#infoModal').modal();
-        });
+    });
 
 
 

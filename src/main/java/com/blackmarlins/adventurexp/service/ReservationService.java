@@ -43,10 +43,9 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
-    public void cancel(Long id) {
+/*    public void delete(Long id) {
         reservationRepository.deleteById(id);
-
-    }
+    }*/
 
     public List<Reservation> findByActivityName(String name) {
         return reservationRepository.findActiveReservationsByActivity_Name(name);
@@ -54,5 +53,14 @@ public class ReservationService {
 
     public List<Reservation> findAllActiveReservations() {
         return reservationRepository.findAllActiveReservations();
+    }
+
+    public Reservation findById(Long id) {
+        Optional<Reservation> result = reservationRepository.findById(id);
+        Reservation reservation = null;
+        if (result.isPresent()) {
+            reservation = result.get();
+        }
+        return reservation;
     }
 }
