@@ -1,0 +1,42 @@
+#header {
+    text-align: left;
+    border-style: hidden;
+    font-size: 40px;
+    color: rgb(0,184,107);
+    width: 100%;
+    margin-top: 50px;
+}
+
+#readButton:hover, #readButton:focus, #readButton:active, #readButton.active {
+    margin: 0;
+}
+
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+}
+
+#center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+.btn-group-edit a {
+    border-radius: 4px !important;
+    width: 150px;
+    margin-left: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+#deleteButton:hover, #reservationListButton:hover, #reservationButton:hover, #editButton:hover, #readInfoButton:hover
+{
+    height: 30px;
+}
+
+

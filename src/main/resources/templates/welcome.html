@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta HTTP-EQUIV="refresh" CONTENT="2; URL=activities/list">
+    <link href='https://fonts.googleapis.com/css?family=Share Tech Mono' rel='stylesheet'>
+    <title>Welcome!</title>
+</head>
+<style>
+    .welcome {
+        font-family: 'Share Tech Mono', roboto, "Times New Roman";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -20%;
+        margin-top: -70px;
+        text-align: center;
+        width: 40%;
+        font-size: 50px;
+        color: rgb(0,184,107);
+    }
+</style>
+
+<body class="welcome">
+<span>Welcome </span><span th:text="${username}"/><span>!</span>
+</body>
+</html>

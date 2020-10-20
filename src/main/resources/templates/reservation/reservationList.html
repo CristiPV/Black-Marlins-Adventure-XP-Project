@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- JS file that handles the pop-up forms -->
+    <script src="/js/reservation.js"></script>
+
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="/css/productNavbar.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Reservations</title>
+</head>
+
+<body>
+
+    <section th:replace="activity/activity :: #navigationContainer"></section>
+
+    <div class="container">
+        <h3 id="header">Reservations</h3>
+
+        <!--Dropdown for filtering the reservations table based on activity -->
+        <form th:action="@{/reservation/list}">
+            <select class="mdb-select md-form md-outline colorful-select dropdown-primary" th:name="activityName" >
+                <option value="" disabled selected>Choose activity</option>
+                <option th:value="all">All activities</option>
+                <option th:each="activity : ${activities}"
+                        th:value="${activity.name}"
+                        th:text="${activity.name}"></option>
+            </select>
+            <button type="submit">Go</button>
+        </form>
+
+        <table class="table table-bordered table-striped" style="margin-top: 10px">
+            <thead class="thead-dark">
+            <tr>
+                <th>Activity</th>
+                <th>Date & Time</th>
+                <th>Amount of people</th>
+                <th>Customer</th>
+                <th>Price</th>
+                <th>Is cancelled</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reservation : ${reservations}">
+                    <td th:text="${reservation.activity.name}" />
+                    <td th:text="${'Date: ' + #dates.day(reservation.date) + '.' + #dates.monthNameShort(reservation.date) + '.' + #dates.year(reservation.date) + ' Time: ' + #dates.hour(reservation.date) + ':' + #dates.minute(reservation.date)}" />
+                    <td th:text="${reservation.amountOfPeople}" />
+                    <td th:text="${reservation.customer.firstName} + ' ' + ${reservation.customer.lastName}" />
+                    <td th:text="${#numbers.formatDecimal(reservation.price, 0, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${reservation.cancelled}"></td>
+                    <td th:disabled="${reservation.cancelled}">
+                        <!-- Read reservation info -->
+                        <a th:href="@{/reservation/findById/(id=${reservation.id})}" class="btn btn-primary btn-sm" id="readInfoButton" style="width: 150px;">Info</a><br>
+                        <!-- Cancel reservation -->
+                        <a th:href="@{/reservation/findById/(id=${reservation.id})}" class="btn btn-danger btn-sm btn-group-edit" id="cancelButton" style="width: 150px;">Cancel with fee</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Info Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Reservation</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/reservation/findById}" th:object="${reservationFlow.reservation}" method="get">
+                        <div class="form-group">
+                            <label for="id">Reservation Id</label>
+                            <input type="text" class="form-control" id="id" name="id" readonly>
+                            <label for="ActName">Activity</label>
+                            <input class="form-control" id="ActName" th:field="*{activity.name}" readonly>
+                            <label for="date" class="col-form-label">Date</label>
+                            <input type="text" class="form-control" id="date" th:field="${reservationFlow.reservation.date}" readonly>
+                            <label for="price" class="col-form-label">Total Price</label>
+                            <input type="number" class="form-control" id="price" th:field="${reservationFlow.reservation.price}" readonly>
+                            <label for="duration" class="col-form-label">Duration</label>
+                            <input type="number" class="form-control" id="duration" th:field="${reservationFlow.reservation.hours}" readonly>
+                            <label for="customerFName" class="col-form-label">Customer First Name</label>
+                            <input type="text" class="form-control" id="customerFName" th:field="*{customer.firstName}" readonly>
+                            <label for="customerLName" class="col-form-label">Customer Last Name</label>
+                            <input type="text" class="form-control" id="customerLName" th:field="*{customer.lastName}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                <!-- End of modal body -->
+                </div>
+            <!-- End of modal content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancel with fee Modal -->
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Cancel with fee</h2>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/reservation/cancel}" th:object="${reservationFlow.reservation}" method="put">
+                        <div class="form-group">
+                            <input type="hidden" id="Cid" name="id">
+                            <label for="fee" class="col-form-label">The cancellation fee is 10% of the total price</label>
+                            <input type="text" class="form-control" id="fee" th:field="*{fee}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-secondary">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        </div>
+                    </form>
+                    <!-- End of modal body -->
+                </div>
+                <!-- End of modal content -->
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

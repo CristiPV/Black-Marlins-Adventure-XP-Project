@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <title>Completed</title>
+</head>
+
+<body>
+
+<div class='form-container'>
+    <div class='left-container'>
+        <h1 th:text="${reservationFlow.reservation.activity.name}"></h1>
+    </div>
+    <div class='right-container'>
+        <header>
+            <h1>Success!</h1>
+            <div class='set'>
+                <div class='amount-people'>
+                    <label>You have now made a reservation.</label>
+                </div>
+            </div>
+        </header>
+        <footer>
+            <div class='set'>
+                <a th:href="@{/activities/list}"><button type="submit" id="next">OK</button></a>
+            </div>
+        </footer>
+    </div>
+</div>
+</body>
+</html>

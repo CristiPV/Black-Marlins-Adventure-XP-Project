@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- JS file that handles the pop-up forms -->
+    <script src="/js/activity.js"></script>
+
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/productNavbar.css">
+
+    <title>Employees</title>
+
+</head>
+
+<body>
+<section th:replace="activity/activity :: #navigationContainer"></section>
+<!-- Main content -->
+<div class="container">
+    <!-- Page Header -->
+    <h3 id="header">Employees</h3>
+
+    <!-- Employees Table -->
+    <table class="table table-bordered table-striped" style="margin-top: 10px">
+        <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Cpr</th>
+            <th>Position</th>
+            <th>Salary</th>
+            <th>Phone Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+
+            <td th:text="${employee.firstName} + ' ' + ${employee.lastName}">Name</td>
+            <td th:text="${employee.cpr}">Cpr</td>
+            <td th:text="${employee.position}">Position</td>
+            <td th:text="${employee.salary}">Salary</td>
+            <td th:text="${employee.phoneNumber}">Phone Number</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
